@@ -3,6 +3,7 @@ spec:
     server: https://kubernetes.default.svc
   sparkNamespace: spark
   source:
+    repoURL: https://github.com/k8s-school/demo-sparkmeasure
     targetRevision:
       default: nil
       # Revision for the fink-alert-simulator chart
