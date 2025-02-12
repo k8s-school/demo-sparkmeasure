@@ -1,0 +1,33 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: spark-operator
+  namespace: argocd
+  labels:
+    app.kubernetes.io/name: spark-operator
+    app.kubernetes.io/part-of: fink
+    app.kubernetes.io/component: operator
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    chart: spark-operator
+    repoURL: https://kubeflow.github.io/spark-operator
+    targetRevision: 2.1.0
+    helm:
+      releaseName: spark-operator
+      valuesObject:
+        webhook:
+          enable: true
+        spark:
+          jobNamespaces: ["{{.Values.spec.sparkNamespace}}"]
+  destination:
+    server: {{ .Values.spec.destination.server }}
+    namespace: spark-operator
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+      # See https://github.com/argoproj/argo-cd/issues/820 and https://github.com/argoproj/argo-cd/issues/13100
+      - ServerSideApply=true
+      - ApplyOutOfSyncOnly=true
