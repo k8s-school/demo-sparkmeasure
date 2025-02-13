@@ -1,20 +1,20 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: spark
+  name: spark-pi
   namespace: argocd
   labels:
-    app.kubernetes.io/name: spark
+    app.kubernetes.io/name: spark-pi
     app.kubernetes.io/part-of: demo-sparkmeasure
   finalizers:
   - resources-finalizer.argocd.argoproj.io
 spec:
   destination:
     server: {{ .Values.spec.destination.server }}
-    namespace: spark
+    namespace: spark-pi
   project: default
   source:
-    path: spark
+    path: spark-pi
     repoURL: {{ .Values.spec.source.repoURL }}
     targetRevision: {{ .Values.spec.source.targetRevision.default }}
   syncPolicy:
