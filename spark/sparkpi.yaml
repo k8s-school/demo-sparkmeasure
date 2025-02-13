@@ -1,11 +1,26 @@
-apiVersion: sparkoperator.k8s.io/v1beta2
+piVersion: "sparkoperator.k8s.io/v1beta2"
 kind: SparkApplication
 metadata:
-  name: spark-pi
-  namespace: default
+  name: spark-pi-prometheus
 spec:
   type: Python
   mode: cluster
-  image: spark:3.4.1
-  mainClass: org.apache.spark.examples.SparkPi
+  image: "park:3.4.1"
+  imagePullPolicy: Always
   mainApplicationFile: local:///opt/spark/examples/src/main/python/pi.py
+  arguments:
+    - "100000"
+  sparkVersion: "3.4.1"
+  driver:
+    cores: 1
+    coreLimit: "1200m"
+    memory: "512m"
+    labels:
+      version: 3.4.1
+    serviceAccount: spark
+  executor:
+    cores: 1
+    instances: 1
+    memory: "512m"
+    labels:
+      version: 3.4.1
