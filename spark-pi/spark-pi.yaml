@@ -5,7 +5,7 @@ metadata:
 spec:
   type: Python
   mode: cluster
-  image: "park:3.4.1"
+  image: "spark:3.4.1"
   imagePullPolicy: Always
   mainApplicationFile: local:///opt/spark/examples/src/main/python/pi.py
   arguments:
