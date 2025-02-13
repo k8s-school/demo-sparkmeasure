@@ -1,7 +1,7 @@
 FROM docker.io/library/spark:3.4.1
 
 USER root
-RUN pip install sparkmeasure
+RUN pip install sparkmeasure==0.24.0
 
 ADD rootfs /
 
