@@ -24,9 +24,14 @@ if __name__ == "__main__":
         return 1 if x ** 2 + y ** 2 <= 1 else 0
 
     stagemetrics = StageMetrics(spark)
-    stagemetrics.runandmeasure(globals(), 'spark.sql("select count(*) from range(1000) cross join range(1000) cross join range(1000)").show()')
+    stagemetrics.begin()
 
     count = spark.sparkContext.parallelize(range(1, n + 1), partitions).map(f).reduce(add)
     print("Pi is roughly %f" % (4.0 * count / n))
+
+    stagemetrics.end()
+
+    stagemetrics.print_report()
+    stagemetrics.print_memory_report()
 
     spark.stop()
