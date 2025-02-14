@@ -3,9 +3,9 @@ kind: SparkApplication
 metadata:
   name: spark-pi-prometheus
 spec:
-  deps:
-    packages:
-      - ch.cern.sparkmeasure:spark-measure_2.12:0.24
+  sparkConf:
+    spark.jars.packages: "ch.cern.sparkmeasure:spark-measure_2.12:0.24"
+    spark.jars.ivy: "/tmp/ivy"
   type: Python
   mode: cluster
   image: "gitlab-registry.in2p3.fr/astrolabsoftware/fink/demo-sparkmeasure:v0.0.1-rc1"
