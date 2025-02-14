@@ -22,10 +22,13 @@ APP_NAME="$CIUX_IMAGE_NAME"
 argocd app create $APP_NAME --dest-server https://kubernetes.default.svc \
     --dest-namespace "$APP_NAME" \
     --repo https://github.com/k8s-school/$APP_NAME \
-    --path apps --revision "$DEMO_SPARKMEASURE_WORKBRANCH" \
+    --path charts/apps --revision "$DEMO_SPARKMEASURE_WORKBRANCH" \
     -p spec.source.targetRevision.default="$DEMO_SPARKMEASURE_WORKBRANCH"
 
 argocd app sync $APP_NAME
+
+argocd app set spark_pi -p image.repository="$CIUX_IMAGE_REGISTRY" \
+    -p image.tag="$CIUX_IMAGE_TAG"
 
 argocd app sync -l app.kubernetes.io/part-of=$APP_NAME,app.kubernetes.io/component=operator
 argocd app wait -l app.kubernetes.io/part-of=$APP_NAME,app.kubernetes.io/component=operator
