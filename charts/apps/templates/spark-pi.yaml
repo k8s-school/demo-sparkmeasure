@@ -14,10 +14,11 @@ spec:
     namespace: spark-pi
   project: default
   source:
-    chart: spark-pi
     path: charts/spark-pi
     repoURL: {{ .Values.spec.source.repoURL }}
     targetRevision: {{ .Values.spec.source.targetRevision.default }}
+    helm:
+      releaseName: fink-broker
   syncPolicy:
     syncOptions:
       - CreateNamespace=true
