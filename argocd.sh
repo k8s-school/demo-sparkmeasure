@@ -8,11 +8,15 @@ set -euxo pipefail
 
 DIR=$(cd "$(dirname "$0")"; pwd -P)
 
+src_dir=$DIR
+
 export CIUXCONFIG=$HOME/.ciux/ciux.sh
 # Run the CD pipeline
 . $CIUXCONFIG
 
 NS=argocd
+
+ciux ignite --selector itest "$src_dir"
 
 argocd login --core
 kubectl config set-context --current --namespace="$NS"
@@ -27,7 +31,7 @@ argocd app create $APP_NAME --dest-server https://kubernetes.default.svc \
 
 argocd app sync $APP_NAME
 
-argocd app set spark-pi -p image.repository="$CIUX_IMAGE_REGISTRY" \
+argocd app set spark-pi \
     -p image.tag="$CIUX_IMAGE_TAG"
 
 argocd app sync -l app.kubernetes.io/part-of=$APP_NAME,app.kubernetes.io/component=operator
