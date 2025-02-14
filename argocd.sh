@@ -31,8 +31,7 @@ argocd app create $APP_NAME --dest-server https://kubernetes.default.svc \
 
 argocd app sync $APP_NAME
 
-argocd app set spark-pi \
-    -p image.tag="$CIUX_IMAGE_TAG"
+argocd app set spark-pi -p image.tag="$CIUX_IMAGE_TAG"
 
 argocd app sync -l app.kubernetes.io/part-of=$APP_NAME,app.kubernetes.io/component=operator
 argocd app wait -l app.kubernetes.io/part-of=$APP_NAME,app.kubernetes.io/component=operator
