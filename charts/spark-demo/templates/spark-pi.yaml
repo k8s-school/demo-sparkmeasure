@@ -10,7 +10,7 @@ spec:
   mode: cluster
   image: "{{ .Values.image.repository }}/{{ .Values.image.name }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
   imagePullPolicy: "{{ .Values.image.pullPolicy }}"
-  mainApplicationFile: local:///opt/spark/examples/src/main/python/pi.py
+  mainApplicationFile: local:///opt/spark/examples/src/main/python/spark-pi.py
   arguments:
     - "10"
   sparkVersion: "3.4.1"
