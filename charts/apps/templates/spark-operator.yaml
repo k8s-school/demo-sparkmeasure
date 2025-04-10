@@ -21,7 +21,8 @@ spec:
         webhook:
           enable: true
         spark:
-          jobNamespaces: ["{{.Values.spec.sparkNamespace}}"]
+          # required by sparkJobNamespaces, to allow to create pods in spark application namespaces
+          jobNamespaces: ["{{.Values.spec.sparkAppName}}"]
   destination:
     server: {{ .Values.spec.destination.server }}
     namespace: spark-operator
