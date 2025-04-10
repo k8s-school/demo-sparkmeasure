@@ -1,7 +1,7 @@
 spec:
   destination:
     server: https://kubernetes.default.svc
-  sparkNamespace: spark-pi
+  sparkAppName: spark-demo
   source:
     repoURL: https://github.com/k8s-school/demo-sparkmeasure
     targetRevision:
