@@ -8,8 +8,7 @@ set -euxo pipefail
 
 DIR=$(cd "$(dirname "$0")"; pwd -P)
 
+$DIR/build.sh
 $DIR/prereq.sh
 $DIR/argocd.sh
-$DIR/wait-s3-bucket.sh
-$DIR/loadbalancer.sh
 $DIR/push-image.sh
