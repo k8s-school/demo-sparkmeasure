@@ -1,9 +1,11 @@
 import sys
 from random import random
 from operator import add
+from time import sleep
 
 from sparkmeasure import StageMetrics
 from pyspark.sql import SparkSession
+from py4j.protocol import Py4JJavaError
 
 
 if __name__ == "__main__":
@@ -32,6 +34,12 @@ if __name__ == "__main__":
     stagemetrics.end()
 
     stagemetrics.print_report()
-    stagemetrics.print_memory_report()
+
+    try:
+        stagemetrics.print_memory_report()
+    except Py4JJavaError:
+        print("Memory report failed, retrying (see https://github.com/LucaCanali/sparkMeasure/blob/master/README.md#examples-of-sparkmeasure-on-the-cli)")
+        sleep(5)
+        stagemetrics.print_memory_report()
 
     spark.stop()
