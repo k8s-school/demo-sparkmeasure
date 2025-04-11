@@ -1,0 +1,2 @@
+* TODO monitor issue about stagemetrics.print_memory_report()  https://github.com/LucaCanali/sparkMeasure/issues/65
+* DONE Check: https://github.com/LucaCanali/sparkMeasure/blob/master/examples/test_sparkmeasure_python.py
