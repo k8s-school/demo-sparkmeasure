@@ -11,12 +11,14 @@ DIR=$(cd "$(dirname "$0")"; pwd -P)
 src_dir=$DIR
 
 export CIUXCONFIG=$HOME/.ciux/ciux.sh
+
+ciux ignite --selector itest "$src_dir"
 # Run the CD pipeline
 . $CIUXCONFIG
 
 NS=argocd
 
-ciux ignite --selector itest "$src_dir"
+
 
 argocd login --core
 kubectl config set-context --current --namespace="$NS"
