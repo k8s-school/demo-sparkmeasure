@@ -3,7 +3,9 @@ kind: SparkApplication
 metadata:
   name: spark-pi
 spec:
-  # Use spark-measure jar located in /opt/spark/jars
+  deps:
+    jars:
+      - local:///opt/spark/additional-jars/spark-measure_2.13-0.25-SNAPSHOT.jar
   type: Python
   mode: cluster
   image: "{{ .Values.image.repository }}/{{ .Values.image.name }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
