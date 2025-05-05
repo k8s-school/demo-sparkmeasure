@@ -5,7 +5,7 @@ metadata:
 spec:
   deps:
     jars:
-      - local:///opt/spark/additional-jars/spark-measure_2.13-0.25-SNAPSHOT.jar
+      - local:///opt/spark/additional-jars/spark-measure_2.12-0.25-SNAPSHOT.jar
   type: Python
   mode: cluster
   image: "{{ .Values.image.repository }}/{{ .Values.image.name }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
