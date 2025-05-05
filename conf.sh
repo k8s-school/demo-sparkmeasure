@@ -1,1 +1,1 @@
-export CIUXCONFIG=$HOME/.ciux/stackable-hadoop.build.sh
+export CIUXCONFIG=$HOME/.ciux/demo-sparkmeasure.build.sh
