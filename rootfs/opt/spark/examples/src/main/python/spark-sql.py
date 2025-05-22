@@ -6,7 +6,7 @@ Run with:
   ./bin/spark-submit --packages ch.cern.sparkmeasure:spark-measure_2.12:0.23 test_sparkmeasure_python.py
 """
 
-import os
+import time
 from pyspark.sql import SparkSession
 from sparkmeasure import StageMetrics
 
@@ -53,6 +53,6 @@ if __name__ == "__main__":
     run_my_workload(spark)
 
     # Wait for debugging
-    os.sleep(36000)
+    time.sleep(36000)
 
     spark.stop()
