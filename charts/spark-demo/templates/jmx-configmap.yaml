@@ -9,6 +9,6 @@ data:
     lowercaseOutputLabelNames: true
     attrNameSnakeCase: true
     rules:
-    - pattern: sparkmeasure<name=(\S+)><>Value
+    - pattern: sparkmeasure<type=Metrics><>(\w+)
       name: sparkmeasure_$1
       type: GAUGE
