@@ -8,6 +8,6 @@ data:
     lowercaseOutputName: true
     lowercaseOutputLabelNames: true
     rules:
-    - pattern: 'sparkmeasure<type=Metrics><>([a-zA-Z0-9_]+)'
-        name: "sparkmeasure_$1"
-        type: GAUGE
+        - pattern: 'sparkmeasure<type=Metrics><>([a-zA-Z0-9_]+)'
+            name: "sparkmeasure_$1"
+            type: GAUGE
