@@ -1,2 +1,3 @@
-* TODO monitor issue about stagemetrics.print_memory_report()  https://github.com/LucaCanali/sparkMeasure/issues/65
+* TODO read MBean doc: https://www.jmdoudoux.fr/java/dej/chap-jmx.htm#jmx-4
+* DONE monitor issue about stagemetrics.print_memory_report()  https://github.com/LucaCanali/sparkMeasure/issues/65
 * DONE Check: https://github.com/LucaCanali/sparkMeasure/blob/master/examples/test_sparkmeasure_python.py
