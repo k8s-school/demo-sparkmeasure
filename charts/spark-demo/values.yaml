@@ -3,3 +3,8 @@ image:
   repository: gitlab-registry.in2p3.fr/astrolabsoftware/fink
   name: demo-sparkmeasure
   tag: "v0.0.1-rc1"
+jmxConfigMountPath: /opt/jmx-config
+jmxConfig: |
+  rules:
+    - pattern: "org.apache.spark.metrics.MetricsSystem.*"
+    - pattern: ".*"
