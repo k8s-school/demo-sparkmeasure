@@ -20,12 +20,22 @@ spec:
     labels:
       version: 3.4.1
     serviceAccount: spark-operator-spark
+    volumeMounts:
+      - name: jmx-config
+        mountPath: /config-jmx/config.yaml
   executor:
     cores: 1
     instances: 1
     memory: "512m"
     labels:
       version: 3.4.1
+    volumeMounts:
+      - name: jmx-config
+        mountPath: /config-jmx/config.yaml
+  volumes:
+    - name: jmx-config
+      configMap:
+        name: spark-jmx-config
   monitoring:
     exposeDriverMetrics: true
     exposeExecutorMetrics: true
