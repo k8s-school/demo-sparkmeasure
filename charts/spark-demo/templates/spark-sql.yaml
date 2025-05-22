@@ -22,7 +22,7 @@ spec:
     serviceAccount: spark-operator-spark
     volumeMounts:
       - name: jmx-config
-        mountPath: /config-jmx/config.yaml
+        mountPath: /config-jmx
   executor:
     cores: 1
     instances: 1
@@ -31,7 +31,7 @@ spec:
       version: 3.4.1
     volumeMounts:
       - name: jmx-config
-        mountPath: /config-jmx/config.yaml
+        mountPath: /config-jmx
   volumes:
     - name: jmx-config
       configMap:
