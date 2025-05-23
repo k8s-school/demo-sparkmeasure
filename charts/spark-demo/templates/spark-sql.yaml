@@ -12,15 +12,6 @@ spec:
   imagePullPolicy: "{{ .Values.image.pullPolicy }}"
   mainApplicationFile: local:///opt/spark/examples/src/main/python/spark-sql.py
   sparkVersion: "3.4.1"
-  driver:
-    lifecycle:
-      postStart:
-        exec:
-          command:
-            - /bin/sh
-            - -c
-            - |
-              cat /config-jmx/config.yaml >> /opt/spark/conf/prometheus.yaml
     cores: 1
     coreLimit: "1200m"
     memory: "512m"
@@ -39,6 +30,8 @@ spec:
     volumeMounts:
       - name: jmx-config
         mountPath: /config-jmx
+      - name: hook-log
+        mountPath: /var/log/hook
   volumes:
     - name: jmx-config
       configMap:
