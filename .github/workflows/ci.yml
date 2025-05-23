@@ -26,6 +26,6 @@ jobs:
       - name: Run argocd
         run: |
           ./argocd.sh
-      - name: Push image
-        run: |
-          ./push-image.sh
+      # - name: Push image
+      #   run: |
+      #     ./push-image.sh
