@@ -41,7 +41,7 @@ spec:
     prometheus:
       # This is the path to the jmx_exporter jar in the spark container image, added at build time
       jmxExporterJar: "/opt/spark/jars/jmx_prometheus_javaagent-1.1.0.jar"
-      configFile: /config-jmx/config.yaml
+      configFile: /config-jmx/prometheus.yaml
       port: 8090
 
 
