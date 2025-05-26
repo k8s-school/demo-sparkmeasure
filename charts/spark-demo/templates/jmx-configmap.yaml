@@ -7,6 +7,10 @@ data:
     lowercaseOutputName: true
     attrNameSnakeCase: true
     rules:
+      # Rules for sparkmeasure
+      - pattern: sparkmeasure<type=Metrics><>(\w+)
+        name: sparkmeasure_$1
+        type: GAUGE
       # Rules from https://github.com/prometheus/jmx_exporter/blob/main/examples/spark.yml
       - pattern: metrics<name=(\S+)\.(\S+)\.driver\.(BlockManager|DAGScheduler|jvm)\.(\S+)><>Value
         name: spark_driver_$3_$4
@@ -92,7 +96,3 @@ data:
           app_namespace: "$1"
           app_id: "$2"
           executor_id: "$3"
-      # Rules for sparkmeasure
-      - pattern: sparkmeasure<type=Metrics><>(\w+)
-        name: sparkmeasure_$1
-        type: GAUGE
