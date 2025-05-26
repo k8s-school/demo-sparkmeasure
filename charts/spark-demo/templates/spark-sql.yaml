@@ -31,8 +31,6 @@ spec:
     volumeMounts:
       - name: jmx-config
         mountPath: /config-jmx
-      - name: hook-log
-        mountPath: /var/log/hook
   volumes:
     - name: jmx-config
       configMap:
