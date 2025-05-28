@@ -25,9 +25,10 @@ cd demo-sparkmeasure
 # Install and run everything from scratch
 run-all.sh
 # Access the spark pods
-kubectl get pods -n spark
+kubectl get pods -n spark-demo
 # Dump the metrics from the prometheus exporter of the spark job
-./check-metrics.sh
+# spark-measure metrics appears ~10 seconds after job startup
+./check-metrics.sh | grep measure
 ```
 
 > ⚠️ **Warning**
