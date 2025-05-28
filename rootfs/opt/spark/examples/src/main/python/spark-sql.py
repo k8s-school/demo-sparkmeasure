@@ -29,6 +29,7 @@ def run_my_workload(spark):
     # get metrics data as a dictionary
     metrics = stagemetrics.aggregate_stagemetrics()
     print(f"metrics elapsedTime = {metrics.get('elapsedTime')}")
+    print(f"metrics: {metrics}")
 
     jmx_publisher.setExecutorRunTime(int(metrics['executorRunTime']))
 
