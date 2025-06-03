@@ -14,6 +14,7 @@ data:
         labels:
           app_namespace: "$1"
           app_id: "$2"
+      - pattern: 'sparkmeasure<.*><>.*'  # fallback for debug
       # Rules from https://github.com/prometheus/jmx_exporter/blob/main/examples/spark.yml
       - pattern: metrics<name=(\S+)\.(\S+)\.driver\.(BlockManager|DAGScheduler|jvm)\.(\S+)><>Value
         name: spark_driver_$3_$4

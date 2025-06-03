@@ -25,7 +25,6 @@ def run_my_workload(spark):
     # get metrics data as a dictionary
     metrics = stagemetrics.aggregate_stagemetrics()
     print(f"metrics elapsedTime = {metrics.get('elapsedTime')}")
-    print(f"metrics: {metrics}")
 
     jmx_publisher = spark._jvm.ch.cern.sparkmeasure.JMXPublisher
     jmx_publisher.register()
@@ -33,8 +32,7 @@ def run_my_workload(spark):
     for k, v in metrics.items():
         java_map.put(k, float(v))
     jmx_publisher.setMetrics(java_map)
-
-
+    print(f"metrics added to jmx_publisher: {metrics}")
 
     # save session metrics data in json format (default)
     df = stagemetrics.create_stagemetrics_DF("PerfStageMetrics")
