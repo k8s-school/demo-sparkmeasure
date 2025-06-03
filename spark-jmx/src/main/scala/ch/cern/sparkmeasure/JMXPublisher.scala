@@ -31,12 +31,14 @@ object JMXPublisher {
 
 
   def register(): Unit = {
+    println("DEBUGXXXXX: Calling register")
     if (!mbs.isRegistered(name)) {
       mbs.registerMBean(mbean, name)
     }
   }
 
   def setMetrics(metrics: java.util.Map[String, Number]): Unit = {
+    println("DEBUGXXXXX: Calling setMetrics")
     metrics.asScala.foreach {
       case (key: String, value: Number) =>
         mbean.setMetric(key, value.doubleValue())

@@ -32,6 +32,11 @@ while getopts h c ; do
 done
 shift `expr $OPTIND - 1`
 
+cd $DIR/spark-jmx
+sbt package
+cd $DIR
+cp $DIR/spark-jmx/target/scala-2.12/*.jar $DIR/rootfs/opt/spark/jars/
+
 # This command avoid retrieving build dependencies if not needed
 $(ciux get image --check $DIR --env)
 
