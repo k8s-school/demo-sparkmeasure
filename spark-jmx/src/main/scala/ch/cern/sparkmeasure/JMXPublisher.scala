@@ -1,25 +1,34 @@
-package com.example.sparkmeasure
+package ch.cern.sparkmeasure
 
 import javax.management._
 import java.lang.management.ManagementFactory
+import java.io.File
 
-trait SparkMeasureMetricsMBean {
-  def getExecutorRunTime(): Long
-  def setExecutorRunTime(value: Long): Unit
-}
-
-class SparkMeasureMetrics extends SparkMeasureMetricsMBean {
-  @volatile var executorRunTime: Long = 0L
-  override def getExecutorRunTime(): Long = executorRunTime
-  override def setExecutorRunTime(value: Long): Unit = {
-    executorRunTime = value
-  }
-}
+import scala.collection.concurrent.TrieMap
+import scala.io.Source
+import scala.collection.JavaConverters._
 
 object JMXPublisher {
   val mbs: MBeanServer = ManagementFactory.getPlatformMBeanServer
   val mbean = new SparkMeasureMetrics()
-  val name = new ObjectName("sparkmeasure:type=Metrics")
+
+  private def getNamespace(): String = {
+    val path = "/var/run/secrets/kubernetes.io/serviceaccount/namespace"
+    val file = new File(path)
+    if (file.exists && file.canRead)
+      Source.fromFile(file).getLines().mkString.trim
+    else "unknown"
+  }
+
+  private def getPodName(): String = {
+    sys.env.getOrElse("HOSTNAME", "unknown")
+  }
+
+  private val namespace = getNamespace()
+  private val podName = getPodName()
+
+  private val name = new ObjectName(s"sparkmeasure:type=Metrics,namespace=$namespace,pod=$podName")
+
 
   def register(): Unit = {
     if (!mbs.isRegistered(name)) {
@@ -27,7 +36,12 @@ object JMXPublisher {
     }
   }
 
-  def setExecutorRunTime(value: Long): Unit = {
-    mbean.setExecutorRunTime(value)
+  def setMetrics(metrics: java.util.Map[String, Number]): Unit = {
+    metrics.asScala.foreach {
+      case (key: String, value: Number) =>
+        mbean.setMetric(key, value.doubleValue())
+      case _ =>
+        println("Skipping invalid metric entry (not String -> Number)")
+    }
   }
 }

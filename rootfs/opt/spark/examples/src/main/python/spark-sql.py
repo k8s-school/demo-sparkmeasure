@@ -13,10 +13,6 @@ from sparkmeasure import StageMetrics
 
 def run_my_workload(spark):
 
-    # Import JVM-side class
-    jmx_publisher = spark._jvm.com.example.sparkmeasure.JMXPublisher
-    jmx_publisher.register()
-
     stagemetrics = StageMetrics(spark)
 
     stagemetrics.begin()
@@ -31,7 +27,13 @@ def run_my_workload(spark):
     print(f"metrics elapsedTime = {metrics.get('elapsedTime')}")
     print(f"metrics: {metrics}")
 
-    jmx_publisher.setExecutorRunTime(int(metrics['executorRunTime']))
+    jmx_publisher = spark._jvm.ch.cern.sparkmeasure.JMXPublisher
+    jmx_publisher.register()
+    java_map = spark._jvm.java.util.HashMap()
+    for k, v in metrics.items():
+        java_map.put(k, float(v))
+    jmx_publisher.setMetrics(java_map)
+
 
 
     # save session metrics data in json format (default)

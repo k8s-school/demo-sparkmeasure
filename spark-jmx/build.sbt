@@ -4,9 +4,7 @@ version := "0.1.0"
 
 scalaVersion := "2.12.18" // Compatible avec Spark 3.x builds
 
-ThisBuild / organization := "com.example"
-
-ThisBuild / version := "0.1.0"
+ThisBuild / organization := "ch.cern"
 
 ThisBuild / javacOptions ++= Seq("-source", "1.8", "-target", "1.8")
 ThisBuild / scalacOptions ++= Seq("-deprecation", "-feature")
