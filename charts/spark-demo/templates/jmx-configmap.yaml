@@ -9,12 +9,15 @@ data:
     rules:
       # Rules for sparkmeasure
       - pattern: 'sparkmeasure<type=Metrics,namespace=(\w+),pod=(\S+)><>Metric\[(\w+)\]'
-        name: spark_driver_$3
+        name: sparkmeasurefallback__$3
         type: GAUGE
         labels:
           app_namespace: "$1"
           app_id: "$2"
-      - pattern: 'sparkmeasure<.*><>.*'  # fallback for debug
+      # For debugging purposes, to see all metrics
+      - pattern: sparkmeasure<type=Metrics><>(\w+)
+        name: sparkmeasurefallback_$1
+        type: GAUGE
       # Rules from https://github.com/prometheus/jmx_exporter/blob/main/examples/spark.yml
       - pattern: metrics<name=(\S+)\.(\S+)\.driver\.(BlockManager|DAGScheduler|jvm)\.(\S+)><>Value
         name: spark_driver_$3_$4
