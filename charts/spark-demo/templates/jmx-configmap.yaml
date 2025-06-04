@@ -8,7 +8,7 @@ data:
     attrNameSnakeCase: true
     rules:
       # For debugging purposes, to see all metrics
-      - pattern: sparkmeasure(\S+)
+      - pattern: sparkmeasure<.*>$
         name: sparkmeasure_$1
         type: GAUGE
       # Rules from https://github.com/prometheus/jmx_exporter/blob/main/examples/spark.yml
