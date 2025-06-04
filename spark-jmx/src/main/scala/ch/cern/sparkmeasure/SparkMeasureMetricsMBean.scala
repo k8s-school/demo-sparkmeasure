@@ -1,4 +1,4 @@
-package com.example.sparkmeasure
+package ch.cern.sparkmeasure
 
 trait SparkMeasureMetricsMBean {
   def getNumStages(): Int

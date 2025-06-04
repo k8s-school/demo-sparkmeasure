@@ -1,4 +1,4 @@
-package com.example.sparkmeasure
+package ch.cern.sparkmeasure
 
 class SparkMeasureMetrics extends SparkMeasureMetricsMBean {
   @volatile private var numStages = 0
