@@ -31,3 +31,4 @@ trait SparkMeasureMetricsMBean {
   def getShuffleRemoteBytesReadToDisk(): Long
   def getShuffleBytesWritten(): Long
   def getShuffleRecordsWritten(): Long
+}
