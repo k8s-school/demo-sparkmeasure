@@ -41,6 +41,7 @@ object JMXPublisher {
     println("DEBUGXXXXX: Calling setMetrics")
     metrics.asScala.foreach {
       case (key: String, value: Number) =>
+        println(s"DEBUGXXXXX: Setting metric $key to value $value")
         mbean.setMetric(key, value.doubleValue())
       case _ =>
         println("Skipping invalid metric entry (not String -> Number)")
