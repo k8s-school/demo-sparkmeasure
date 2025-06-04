@@ -9,9 +9,10 @@ Run with:
 import time
 from pyspark.sql import SparkSession
 from sparkmeasure import StageMetrics
+from typing import Union, Dict
 
 
-def publish_metrics(spark_session, metrics: dict[str, float | int]):
+def publish_metrics(spark_session, metrics: Dict[str, Union[float, int]]):
     jvm = spark_session._jvm
     jmx = jvm.ch.cern.sparkmeasure.JMXPublisher
     jmx.register()
