@@ -27,8 +27,7 @@ object JMXPublisher {
   private val namespace = getNamespace()
   private val podName = getPodName()
 
-  // private val name = new ObjectName(s"sparkmeasure:type=Metrics,namespace=$namespace,pod=$podName")
-  val name = new ObjectName("sparkmeasure:type=Metrics")
+  private val name = new ObjectName(s"sparkmeasure:type=Metrics,namespace=$namespace,pod=$podName")
   def register(): Unit = {
     if (!mbs.isRegistered(name)) {
       mbs.registerMBean(mbean, name)
