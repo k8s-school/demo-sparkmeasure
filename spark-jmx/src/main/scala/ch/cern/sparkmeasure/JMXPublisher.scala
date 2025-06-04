@@ -29,22 +29,14 @@ object JMXPublisher {
 
   private val name = new ObjectName(s"sparkmeasure:type=Metrics,namespace=$namespace,pod=$podName")
 
-
   def register(): Unit = {
-    println("DEBUGXXXXX: Calling register")
     if (!mbs.isRegistered(name)) {
       mbs.registerMBean(mbean, name)
     }
   }
 
-  def setMetrics(metrics: java.util.Map[String, Number]): Unit = {
-    println("DEBUGXXXXX: Calling setMetrics")
-    metrics.asScala.foreach {
-      case (key: String, value: Number) =>
-        println(s"DEBUGXXXXX: Setting metric $key to value $value")
-        mbean.setMetric(key, value.doubleValue())
-      case _ =>
-        println("Skipping invalid metric entry (not String -> Number)")
-    }
+  def setMetricsMap(metrics: java.util.Map[String, Number]): Unit = {
+    mbean.setMetrics(metrics)
   }
+
 }

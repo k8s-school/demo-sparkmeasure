@@ -11,6 +11,17 @@ from pyspark.sql import SparkSession
 from sparkmeasure import StageMetrics
 
 
+def publish_metrics(spark_session, metrics: dict[str, float | int]):
+    jvm = spark_session._jvm
+    jmx = jvm.ch.cern.sparkmeasure.JMXPublisher
+    jmx.register()
+
+    java_map = jvm.java.util.HashMap()
+    for key, value in metrics.items():
+        if isinstance(value, (int, float)):
+            java_map.put(key, float(value))
+    jmx.setMetricsMap(java_map)
+
 def run_my_workload(spark):
 
     stagemetrics = StageMetrics(spark)
@@ -26,13 +37,7 @@ def run_my_workload(spark):
     metrics = stagemetrics.aggregate_stagemetrics()
     print(f"metrics elapsedTime = {metrics.get('elapsedTime')}")
 
-    jmx_publisher = spark._jvm.ch.cern.sparkmeasure.JMXPublisher
-    jmx_publisher.register()
-    java_map = spark._jvm.java.util.HashMap()
-    for k, v in metrics.items():
-        java_map.put(k, float(v))
-    jmx_publisher.setMetrics(java_map)
-    print(f"metrics added to jmx_publisher: {metrics}")
+    publish_metrics(spark, metrics)
 
     # save session metrics data in json format (default)
     df = stagemetrics.create_stagemetrics_DF("PerfStageMetrics")
