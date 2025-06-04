@@ -43,6 +43,7 @@ class SparkMeasureMetrics extends SparkMeasureMetricsMBean {
 
   def set(key: String, value: Number): Unit = {
     val longVal = value.longValue()
+    println(s"[JMX] Setting metric: $key = $value")
     key match {
       case "numStages" => numStages = value.intValue()
       case "numTasks" => numTasks = value.intValue()
