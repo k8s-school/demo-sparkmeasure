@@ -75,39 +75,74 @@ class SparkMeasureMetrics extends SparkMeasureMetricsMBean {
       case "shuffleRemoteBytesReadToDisk" => shuffleRemoteBytesReadToDisk = longVal
       case "shuffleBytesWritten" => shuffleBytesWritten = longVal
       case "shuffleRecordsWritten" => shuffleRecordsWritten = longVal
-      case _ => // ignore unknowns
+      case _ => println(s"[JMX] Unknown metric: $key")
     }
   }
 
-  // Accesseurs
-  def getNumStages(): Int = numStages
-  def getNumTasks(): Int = numTasks
-  def getElapsedTime(): Long = elapsedTime
-  def getStageDuration(): Long = stageDuration
-  def getExecutorRunTime(): Long = executorRunTime
-  def getExecutorCpuTime(): Long = executorCpuTime
-  def getExecutorDeserializeTime(): Long = executorDeserializeTime
-  def getExecutorDeserializeCpuTime(): Long = executorDeserializeCpuTime
-  def getResultSerializationTime(): Long = resultSerializationTime
-  def getJvmGCTime(): Long = jvmGCTime
-  def getShuffleFetchWaitTime(): Long = shuffleFetchWaitTime
-  def getShuffleWriteTime(): Long = shuffleWriteTime
-  def getResultSize(): Long = resultSize
-  def getDiskBytesSpilled(): Long = diskBytesSpilled
-  def getMemoryBytesSpilled(): Long = memoryBytesSpilled
-  def getPeakExecutionMemory(): Long = peakExecutionMemory
-  def getRecordsRead(): Long = recordsRead
-  def getBytesRead(): Long = bytesRead
-  def getRecordsWritten(): Long = recordsWritten
-  def getBytesWritten(): Long = bytesWritten
-  def getShuffleRecordsRead(): Long = shuffleRecordsRead
-  def getShuffleTotalBlocksFetched(): Long = shuffleTotalBlocksFetched
-  def getShuffleLocalBlocksFetched(): Long = shuffleLocalBlocksFetched
-  def getShuffleRemoteBlocksFetched(): Long = shuffleRemoteBlocksFetched
-  def getShuffleTotalBytesRead(): Long = shuffleTotalBytesRead
-  def getShuffleLocalBytesRead(): Long = shuffleLocalBytesRead
-  def getShuffleRemoteBytesRead(): Long = shuffleRemoteBytesRead
-  def getShuffleRemoteBytesReadToDisk(): Long = shuffleRemoteBytesReadToDisk
-  def getShuffleBytesWritten(): Long = shuffleBytesWritten
-  def getShuffleRecordsWritten(): Long = shuffleRecordsWritten
+  // Accessors for metrics
+  override def getNumStages(): Int = numStages
+  override def getNumTasks(): Int = numTasks
+  override def getElapsedTime(): Long = elapsedTime
+  override def getStageDuration(): Long = stageDuration
+  override def getExecutorRunTime(): Long = executorRunTime
+  override def getExecutorCpuTime(): Long = executorCpuTime
+  override def getExecutorDeserializeTime(): Long = executorDeserializeTime
+  override def getExecutorDeserializeCpuTime(): Long = executorDeserializeCpuTime
+  override def getResultSerializationTime(): Long = resultSerializationTime
+  override def getJvmGCTime(): Long = jvmGCTime
+  override def getShuffleFetchWaitTime(): Long = shuffleFetchWaitTime
+  override def getShuffleWriteTime(): Long = shuffleWriteTime
+  override def getResultSize(): Long = resultSize
+  override def getDiskBytesSpilled(): Long = diskBytesSpilled
+  override def getMemoryBytesSpilled(): Long = memoryBytesSpilled
+  override def getPeakExecutionMemory(): Long = peakExecutionMemory
+  override def getRecordsRead(): Long = recordsRead
+  override def getBytesRead(): Long = bytesRead
+  override def getRecordsWritten(): Long = recordsWritten
+  override def getBytesWritten(): Long = bytesWritten
+  override def getShuffleRecordsRead(): Long = shuffleRecordsRead
+  override def getShuffleTotalBlocksFetched(): Long = shuffleTotalBlocksFetched
+  override def getShuffleLocalBlocksFetched(): Long = shuffleLocalBlocksFetched
+  override def getShuffleRemoteBlocksFetched(): Long = shuffleRemoteBlocksFetched
+  override def getShuffleTotalBytesRead(): Long = shuffleTotalBytesRead
+  override def getShuffleLocalBytesRead(): Long = shuffleLocalBytesRead
+  override def getShuffleRemoteBytesRead(): Long = shuffleRemoteBytesRead
+  override def getShuffleRemoteBytesReadToDisk(): Long = shuffleRemoteBytesReadToDisk
+  override def getShuffleBytesWritten(): Long = shuffleBytesWritten
+  override def getShuffleRecordsWritten(): Long = shuffleRecordsWritten
+
+  // Setters for metrics
+  override def setNumStages(numStages: Int): Unit = this.numStages = numStages
+  override def setNumTasks(numTasks: Int): Unit = this.numTasks = numTasks
+  override def setElapsedTime(elapsedTime: Long): Unit = this.elapsedTime = elapsedTime
+  override def setStageDuration(stageDuration: Long): Unit = this.stageDuration = stageDuration
+  override def setExecutorRunTime(executorRunTime: Long): Unit = this.executorRunTime = executorRunTime
+  override def setExecutorCpuTime(executorCpuTime: Long): Unit = this.executorCpuTime = executorCpuTime
+  override def setExecutorDeserializeTime(executorDeserializeTime: Long): Unit = this.executorDeserializeTime = executorDeserializeTime
+  override def setExecutorDeserializeCpuTime(executorDeserializeCpuTime: Long): Unit = this.executorDeserializeCpuTime = executorDeserializeCpuTime
+  override def setResultSerializationTime(resultSerializationTime: Long): Unit = this.resultSerializationTime = resultSerializationTime
+  override def setJvmGCTime(jvmGCTime: Long): Unit = this.jvmGCTime = jvmGCTime
+  override def setShuffleFetchWaitTime(shuffleFetchWaitTime: Long): Unit = this.shuffleFetchWaitTime = shuffleFetchWaitTime
+  override def setShuffleWriteTime(shuffleWriteTime: Long): Unit = this.shuffleWriteTime = shuffleWriteTime
+  override def setResultSize(resultSize: Long): Unit = this.resultSize = resultSize
+  override def setDiskBytesSpilled(diskBytesSpilled: Long): Unit = this.diskBytesSpilled = diskBytesSpilled
+  override def setMemoryBytesSpilled(memoryBytesSpilled: Long): Unit = this.memoryBytesSpilled = memoryBytesSpilled
+  override def setPeakExecutionMemory(peakExecutionMemory: Long): Unit = this.peakExecutionMemory = peakExecutionMemory
+  override def setRecordsRead(recordsRead: Long): Unit = this.recordsRead = recordsRead
+  override def setBytesRead(bytesRead: Long): Unit = this.bytesRead = bytesRead
+  override def setRecordsWritten(recordsWritten: Long): Unit = this.recordsWritten = recordsWritten
+  override def setBytesWritten(bytesWritten: Long): Unit = this.bytesWritten = bytesWritten
+  override def setShuffleRecordsRead(shuffleRecordsRead: Long): Unit = this.shuffleRecordsRead = shuffleRecordsRead
+  override def setShuffleTotalBlocksFetched(shuffleTotalBlocksFetched: Long): Unit = this.shuffleTotalBlocksFetched = shuffleTotalBlocksFetched
+  override def setShuffleLocalBlocksFetched(shuffleLocalBlocksFetched: Long): Unit = this.shuffleLocalBlocksFetched = shuffleLocalBlocksFetched
+  override def setShuffleRemoteBlocksFetched(shuffleRemoteBlocksFetched: Long): Unit = this.shuffleRemoteBlocksFetched = shuffleRemoteBlocksFetched
+  override def setShuffleTotalBytesRead(shuffleTotalBytesRead: Long): Unit = this.shuffleTotalBytesRead = shuffleTotalBytesRead
+  override def setShuffleLocalBytesRead(shuffleLocalBytesRead: Long): Unit = this.shuffleLocalBytesRead = shuffleLocalBytesRead
+  override def setShuffleRemoteBytesRead(shuffleRemoteBytesRead: Long): Unit = this.shuffleRemoteBytesRead = shuffleRemoteBytesRead
+  override def setShuffleRemoteBytesReadToDisk(shuffleRemoteBytesReadToDisk: Long): Unit = {
+    this.shuffleRemoteBytesReadToDisk = shuffleRemoteBytesReadToDisk
+  }
+  override def setShuffleBytesWritten(shuffleBytesWritten: Long): Unit = this.shuffleBytesWritten = shuffleBytesWritten
+  override def setShuffleRecordsWritten(shuffleRecordsWritten: Long): Unit = this.shuffleRecordsWritten = shuffleRecordsWritten
+
 }
