@@ -8,7 +8,7 @@ data:
     attrNameSnakeCase: true
     rules:
       # For debugging purposes, to see all metrics
-      - pattern: sparkmeasuremetrics><name=(\S+)\.(\S+)>(\w+)
+      - pattern: sparkmeasuremetrics><name=(\S+)\.(\S+)><>(\w+)
         name: sparkmeasure_$3
         type: GAUGE
         labels:
