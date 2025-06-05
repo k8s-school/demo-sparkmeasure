@@ -8,9 +8,12 @@ data:
     attrNameSnakeCase: true
     rules:
       # For debugging purposes, to see all metrics
-      - pattern: sparkmeasure<type=Metrics><>(\w+)
-        name: sparkmeasure_$1
+      - pattern: sparkmeasuremetrics><name=(\S+)\.(\S+)>(\w+)
+        name: sparkmeasure_$3
         type: GAUGE
+        labels:
+          app_namespace: "$1"
+          app_id: "$2"
       # Rules from https://github.com/prometheus/jmx_exporter/blob/main/examples/spark.yml
       - pattern: metrics<name=(\S+)\.(\S+)\.driver\.(BlockManager|DAGScheduler|jvm)\.(\S+)><>Value
         name: spark_driver_$3_$4
