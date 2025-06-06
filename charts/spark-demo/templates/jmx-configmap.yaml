@@ -7,9 +7,9 @@ data:
     lowercaseOutputName: true
     attrNameSnakeCase: true
     rules:
-      - pattern: (\S+)<(\S+)><>(\w+)
+      - pattern: ^([^<]+)<([^>]+)><>([a-zA-Z0-9_]+)$
         name: debug_$1_$3
-        type: GAUGE
+        type: gauge
         labels:
           properties: "$2"
       - pattern: sparkmeasure<type=Metrics><>(\w+)

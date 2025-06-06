@@ -34,7 +34,7 @@ object JMXPublisher {
   // TODO add support for this
   // private val name = new ObjectName(s"sparkmeasure:type=Metrics,namespace=$namespace,pod=$podName")
   //val name = new ObjectName(s"sparkmeasuremetrics:name=$namespace.$podName")
-  val name = new ObjectName("sparkmeasure:type=Metrics")
+  val name = new ObjectName(s"sparkmeasure:name=toto,type=Metrics")
 
   def register(): Unit = {
     if (!mbs.isRegistered(name)) {
