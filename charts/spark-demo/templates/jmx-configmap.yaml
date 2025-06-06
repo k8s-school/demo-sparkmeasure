@@ -7,8 +7,11 @@ data:
     lowercaseOutputName: true
     attrNameSnakeCase: true
     rules:
+      - pattern: sparkmeasure<type=Metrics><>(\w+)
+        name: sparkmeasure_$1
+        type: GAUGE
       - pattern: ^sparkmeasuremetrics<name=([^.]+)\.([^.]+)><>([a-zA-Z0-9_]+)$
-        name: spark_$3
+        name: sparkmeasuremetrics_$3
         type: GAUGE
         labels:
           namespace: "$1"
