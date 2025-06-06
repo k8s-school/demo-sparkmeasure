@@ -7,7 +7,7 @@ data:
     lowercaseOutputName: true
     attrNameSnakeCase: true
     rules:
-      - pattern: '(\S+)<(\S+)><>(\w+)
+      - pattern: (\S+)<(\S+)><>(\w+)
         name: debug_$1_$3
         type: GAUGE
         labels:
