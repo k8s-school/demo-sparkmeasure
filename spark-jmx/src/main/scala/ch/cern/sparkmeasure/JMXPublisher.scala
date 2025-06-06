@@ -4,6 +4,8 @@ import javax.management._
 import java.lang.management.ManagementFactory
 import java.io.File
 
+import org.slf4j.LoggerFactory
+
 import scala.collection.concurrent.TrieMap
 import scala.io.Source
 import scala.collection.JavaConverters._
@@ -11,6 +13,8 @@ import scala.collection.JavaConverters._
 object JMXPublisher {
   val mbs: MBeanServer = ManagementFactory.getPlatformMBeanServer
   val mbean = new SparkMeasureMetrics()
+
+  private val logger = LoggerFactory.getLogger(getClass)
 
   private def getNamespace(): String = {
     val path = "/var/run/secrets/kubernetes.io/serviceaccount/namespace"
@@ -32,6 +36,7 @@ object JMXPublisher {
   val name = new ObjectName(s"sparkmeasuremetrics:name=$namespace.$podName")
   def register(): Unit = {
     if (!mbs.isRegistered(name)) {
+      logger.info(s"Registering SparkMeasureMetrics MBean with name: $name")
       mbs.registerMBean(mbean, name)
     }
   }
