@@ -7,6 +7,11 @@ data:
     lowercaseOutputName: true
     attrNameSnakeCase: true
     rules:
+      - pattern: '(\S+)<(\S+)><>(\w+)
+        name: debug_$1_$3
+        type: GAUGE
+        labels:
+          properties: "$2"
       - pattern: sparkmeasure<type=Metrics,namespace=(\S+),pod=(\S+)><>(\w+)
         name: sparkmeasure_$3
         type: GAUGE
