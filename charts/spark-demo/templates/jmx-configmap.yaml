@@ -7,11 +7,11 @@ data:
     lowercaseOutputName: true
     attrNameSnakeCase: true
     rules:
-      - pattern: ^sparkmeasuremetrics<.*><>.*$
-        name: sparkmeasure_$3
+      - pattern: ^sparkmeasuremetrics<name=([^.]+)\.([^.]+)><>([a-zA-Z0-9_]+)$
+        name: spark_$3
         type: GAUGE
         labels:
-          app_namespace: "$1"
+          namespace: "$1"
           app_id: "$2"
       # Rules from https://github.com/prometheus/jmx_exporter/blob/main/examples/spark.yml
       - pattern: metrics<name=(\S+)\.(\S+)\.driver\.(BlockManager|DAGScheduler|jvm)\.(\S+)><>Value
