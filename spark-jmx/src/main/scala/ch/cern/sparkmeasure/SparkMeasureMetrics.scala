@@ -1,5 +1,7 @@
 package ch.cern.sparkmeasure
 
+import org.slf4j.LoggerFactory
+
 class SparkMeasureMetrics extends SparkMeasureMetricsMBean {
   @volatile private var numStages = 0
   @volatile private var numTasks = 0
@@ -38,12 +40,12 @@ class SparkMeasureMetrics extends SparkMeasureMetricsMBean {
     metrics.asScala.foreach { case (key, value) =>
       set(key, value.doubleValue())
     }
-    println(s"[JMX] ${metrics.size} metrics updated.")
+    logger.info(s"[JMX] ${metrics.size} metrics updated: ${metrics.asScala.mkString(", ")}")
   }
 
   def set(key: String, value: Number): Unit = {
     val longVal = value.longValue()
-    println(s"[JMX] Setting metric: $key = $value")
+    logger.debug(s"[JMX] Setting metric: $key = $value")
     key match {
       case "numStages" => numStages = value.intValue()
       case "numTasks" => numTasks = value.intValue()
