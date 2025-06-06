@@ -11,7 +11,7 @@ data:
       #   name: jmx_debug_all
       #   type: GAUGE
       - pattern: sparkmeasure<name=(\S+), type=Metrics><>(\S+)
-        name: spark_$2
+        name: sparkmeasure_$2
         type: gauge
         labels:
           bean_name: "$1"
