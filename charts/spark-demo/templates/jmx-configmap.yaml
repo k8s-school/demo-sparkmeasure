@@ -7,11 +7,9 @@ data:
     lowercaseOutputName: true
     attrNameSnakeCase: true
     rules:
-      - pattern: ^sparkmeasure<name=([^,]+),type=Metrics><>([a-zA-Z0-9_]+)$
-        name: spark_$2
-        type: gauge
-        labels:
-          metric_name: "$1"
+      - pattern: ".*"
+        name: jmx_debug_all
+        type: GAUGE
       - pattern: sparkmeasure<type=Metrics><>(\w+)
         name: sparkmeasure_$1
         type: GAUGE
