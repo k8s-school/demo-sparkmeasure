@@ -10,7 +10,7 @@ data:
       - pattern: ".*"
         name: jmx_debug_all
         type: GAUGE
-      - pattern: ^sparkmeasure<name=([^, ]+), ?type=Metrics><>([a-zA-Z0-9_]+)$
+      - pattern: ^sparkmeasure<name=([^, ]+), type=Metrics><>([a-zA-Z0-9_]+)$
         name: spark_$2
         type: gauge
         labels:
