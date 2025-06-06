@@ -37,6 +37,17 @@ sbt package
 cd $DIR
 cp $DIR/spark-jmx/target/scala-2.12/*.jar $DIR/rootfs/opt/spark/jars/
 
+# Check if changes in $DIR/rootfs/opt/spark/jars/
+if [ -z "$(git -C $DIR status --porcelain rootfs/opt/spark/jars/)" ]; then
+  echo "No changes in spark-jmx jar, skipping commit"
+  exit 0
+else
+  echo "Changes detected in spark-jmx jar, proceeding with commit"
+  git -C $DIR add rootfs
+  git commit -m "Update spark-jmx jar"
+  git push
+fi
+
 # This command avoid retrieving build dependencies if not needed
 $(ciux get image --check $DIR --env)
 
