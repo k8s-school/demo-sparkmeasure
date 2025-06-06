@@ -34,6 +34,8 @@ class SparkMeasureMetrics extends SparkMeasureMetricsMBean {
   @volatile private var shuffleBytesWritten = 0L
   @volatile private var shuffleRecordsWritten = 0L
 
+  private val logger = LoggerFactory.getLogger(getClass)
+
   def setMetrics(metrics: java.util.Map[String, Number]): Unit = {
     import scala.collection.JavaConverters._
 
