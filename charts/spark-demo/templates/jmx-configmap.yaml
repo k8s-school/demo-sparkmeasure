@@ -7,6 +7,8 @@ data:
     lowercaseOutputName: true
     attrNameSnakeCase: true
     rules:
+      - pattern: 'custom\.metrics<name=(\w+)>'
+        name: spark_custom_$1
       # - pattern: ".*"
       #   name: jmx_debug_all
       #   type: GAUGE
