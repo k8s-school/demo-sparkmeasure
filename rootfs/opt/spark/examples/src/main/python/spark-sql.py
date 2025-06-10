@@ -38,6 +38,9 @@ def run_my_workload(spark):
     metrics = stagemetrics.aggregate_stagemetrics()
     print(f"metrics elapsedTime = {metrics.get('elapsedTime')}")
 
+    jvm = spark._jvm.com.example.metrics.DropwizardMetrics
+    jvm.setGauge("totometric", 321.0)
+
     publish_metrics(spark, metrics)
 
     # save session metrics data in json format (default)
