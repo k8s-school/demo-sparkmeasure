@@ -13,15 +13,15 @@ from typing import Union, Dict
 
 
 def publish_metrics(spark_session, metrics: Dict[str, Union[float, int]]):
-    jvm = spark_session._jvm
-    jmx = jvm.ch.cern.sparkmeasure.JMXPublisher
-    jmx.register()
+    try:
+        jvm = spark_session._jvm
+        dropwizard = jvm.com.example.metrics.DropwizardMetrics
+        for key, value in metrics.items():
+            dropwizard.setGauge(key, float(value))
 
-    java_map = jvm.java.util.HashMap()
-    for key, value in metrics.items():
-        if isinstance(value, (int, float)):
-            java_map.put(key, float(value))
-    jmx.setMetricsMap(java_map)
+        print(f"[INFO] {len(metrics)} Dropwizard metrics published via JMX")
+    except Exception as e:
+        print(f"[ERROR] Failed to publish Dropwizard metrics: {e}")
 
 def run_my_workload(spark):
 
@@ -38,10 +38,7 @@ def run_my_workload(spark):
     metrics = stagemetrics.aggregate_stagemetrics()
     print(f"metrics elapsedTime = {metrics.get('elapsedTime')}")
 
-    jvm = spark._jvm.ch.cern.metrics.DropwizardMetrics
-    jvm.setGauge("totometric", 321.0)
-
-    # publish_metrics(spark, metrics)
+    publish_metrics(spark, metrics)
 
     # save session metrics data in json format (default)
     df = stagemetrics.create_stagemetrics_DF("PerfStageMetrics")
