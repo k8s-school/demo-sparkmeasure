@@ -17,7 +17,8 @@ object DropwizardMetrics {
 
   reporter.start()
 
-  def setGauge(name: String, value: Double): Unit = {
+  def setGauge(shortname: String, value: Double): Unit = {
+    val name = "namespace.pod." + shortname
     if (!knownMetrics.contains(name)) {
       registry.register(name, new Gauge[Double] {
         override def getValue: Double = values.getOrElse(name, 0.0)
