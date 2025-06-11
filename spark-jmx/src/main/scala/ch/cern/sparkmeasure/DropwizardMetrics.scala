@@ -12,7 +12,7 @@ object DropwizardMetrics {
   // Démarre le JMX reporter une seule fois
   private val reporter: JmxReporter = JmxReporter
     .forRegistry(registry)
-    .inDomain("custom.metrics") // <== domaine JMX
+    .inDomain("sparkmeasure.metrics") // <== domaine JMX
     .build()
 
   reporter.start()
