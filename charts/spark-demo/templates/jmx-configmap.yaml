@@ -7,9 +7,9 @@ data:
     lowercaseOutputName: true
     attrNameSnakeCase: true
     rules:
-      - pattern: ".*"
-        name: jmx_debug_all
-        type: GAUGE
+      # - pattern: ".*"
+      #   name: jmx_debug_all
+      #   type: GAUGE
       - pattern: sparkmeasure\.metrics<name=([^,>]+),\s*type=gauges><>Value
         name: sparkmeasure_$1_$2
         type: GAUGE
