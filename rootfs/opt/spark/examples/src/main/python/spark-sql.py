@@ -41,7 +41,7 @@ def run_my_workload(spark):
     jvm = spark._jvm.ch.cern.metrics.DropwizardMetrics
     jvm.setGauge("totometric", 321.0)
 
-    publish_metrics(spark, metrics)
+    # publish_metrics(spark, metrics)
 
     # save session metrics data in json format (default)
     df = stagemetrics.create_stagemetrics_DF("PerfStageMetrics")

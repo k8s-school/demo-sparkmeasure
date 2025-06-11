@@ -10,9 +10,12 @@ data:
       - pattern: ".*"
         name: jmx_debug_all
         type: GAUGE
-      - pattern: 'sparkmeasure\.metrics<name=(\w+)>'
-        name: sparkmeasure_$1
+      - pattern: sparkmeasure\.metrics<name=([^,>]+),\s*type=gauges><>Value
+        name: sparkmeasure_$1_$2
         type: GAUGE
+      - pattern: sparkmeasure\.metrics<name=([^,>]+),\s*type=counters><>(\w+)
+        name: sparkmeasure_$1_$2
+        type: COUNTER
       # Rules from https://github.com/prometheus/jmx_exporter/blob/main/examples/spark.yml
       - pattern: metrics<name=(\S+)\.(\S+)\.driver\.(BlockManager|DAGScheduler|jvm)\.(\S+)><>Value
         name: spark_driver_$3_$4
