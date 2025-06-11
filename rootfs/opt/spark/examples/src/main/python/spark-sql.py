@@ -14,8 +14,7 @@ from typing import Union, Dict
 
 def publish_metrics(spark_session, metrics: Dict[str, Union[float, int]]):
     try:
-        jvm = spark_session._jvm
-        dropwizard = jvm.com.example.metrics.DropwizardMetrics
+        dropwizard = spark_session._jvm.ch.cern.metrics.DropwizardMetrics
         for key, value in metrics.items():
             dropwizard.setGauge(key, float(value))
 
