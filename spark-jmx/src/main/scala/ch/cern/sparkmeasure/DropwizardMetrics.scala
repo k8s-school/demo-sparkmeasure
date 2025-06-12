@@ -50,22 +50,13 @@ object DropwizardMetrics {
   def setCounter(shortname: String, value: Long): Unit = {
     logger.debug(s"[JMX] Setting counter: $shortname = $value")
     val name = getNamespace() + "." + getPodName() + "." + shortname
-    val counter = counters.getOrElseUpdate(name, {
+    if (!knownCounters.contains(name)) {
+      counters.update(name, registry.counter(name))
       knownCounters += name
-      registry.counter(name)
-    })
+    }
+    val counter = counters(name)
     val diff = value - counter.getCount
     if (diff > 0) counter.inc(diff) else if (diff < 0) counter.dec(-diff)
-  }
-
-  def incCounter(shortname: String, delta: Long = 1L): Unit = {
-    logger.debug(s"[JMX] Increment counter: $shortname by $delta")
-    val name = getNamespace() + "." + getPodName() + "." + shortname
-    val counter = counters.getOrElseUpdate(name, {
-      knownCounters += name
-      registry.counter(name)
-    })
-    counter.inc(delta)
   }
 
   private val values = scala.collection.concurrent.TrieMap[String, Double]()
