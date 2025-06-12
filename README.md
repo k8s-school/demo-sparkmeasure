@@ -2,6 +2,10 @@
 
 Integrate sparkMeasure for Enhanced Performance Monitoring
 
+This demo exposes metrics through JMX using both **gauges** and **counters**.
+Metrics can be scraped by Prometheus thanks to the provided JMX exporter
+configuration.
+
 # How to run the demo
 
 ## Pre-requisites
@@ -29,6 +33,10 @@ kubectl get pods -n spark-demo
 # Dump the metrics from the prometheus exporter of the spark job
 # spark-measure metrics appears ~10 seconds after job startup
 ./check-metrics.sh | grep measure
+
+The `spark-sql.py` example publishes sparkMeasure metrics as gauges and also
+updates a counter named `metrics_published_total` using `setCounter` each time
+metrics are sent via JMX.
 ```
 
 > ⚠️ **Warning**
