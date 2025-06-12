@@ -16,6 +16,12 @@ data:
         labels:
           app_namespace: "$1"
           app_id: "$2"
+      - pattern: sparkmeasure\.metrics<name=(\S+)\.(\S+)\.(\S+),\s*type=counters><>Count
+        name: sparkmeasure_$3_total
+        type: COUNTER
+        labels:
+          app_namespace: "$1"
+          app_id: "$2"
       # Rules from https://github.com/prometheus/jmx_exporter/blob/main/examples/spark.yml
       - pattern: metrics<name=(\S+)\.(\S+)\.driver\.(BlockManager|DAGScheduler|jvm)\.(\S+)><>Value
         name: spark_driver_$3_$4
