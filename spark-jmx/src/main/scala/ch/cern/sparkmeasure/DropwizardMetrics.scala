@@ -40,25 +40,23 @@ object DropwizardMetrics {
     val name = getNamespace() + "." + getPodName() + "." + shortname
     if (!knownGauges.contains(name)) {
       registry.register(name, new Gauge[Double] {
-        override def getValue: Double = values.getOrElse(name, 0.0)
+        override def getValue: Double = gauges.getOrElse(name, 0.0)
       })
       knownGauges += name
     }
-    values.update(name, value)
+    gauges.update(name, value)
   }
 
   def setCounter(shortname: String, value: Long): Unit = {
     logger.debug(s"[JMX] Setting counter: $shortname = $value")
     val name = getNamespace() + "." + getPodName() + "." + shortname
     if (!knownCounters.contains(name)) {
-      counters.update(name, registry.counter(name))
+      registry.register(name, new Counter())
       knownCounters += name
     }
-    val counter = counters(name)
-    val diff = value - counter.getCount
-    if (diff > 0) counter.inc(diff) else if (diff < 0) counter.dec(-diff)
+    counters.update(name, value)
   }
 
-  private val values = scala.collection.concurrent.TrieMap[String, Double]()
-  private val counters = scala.collection.concurrent.TrieMap[String, Counter]()
+  private val gauges = scala.collection.concurrent.TrieMap[String, Double]()
+  private val counters = scala.collection.concurrent.TrieMap[String, Long]()
 }
