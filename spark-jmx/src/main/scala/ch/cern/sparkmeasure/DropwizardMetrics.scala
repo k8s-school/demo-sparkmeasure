@@ -48,7 +48,7 @@ object DropwizardMetrics {
   }
 
   def setCounter(shortname: String, value: Long): Unit = {
-    logger.debug(s"[JMX] Setting counter: $shortname = $value")
+    logger.info(s"[JMX] Setting counter: $shortname = $value")
     val name = getNamespace() + "." + getPodName() + "." + shortname
     if (!knownCounters.contains(name)) {
       registry.register(name, new Counter())
