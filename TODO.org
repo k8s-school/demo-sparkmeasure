@@ -1,4 +1,4 @@
-* TODO difference between gauge and counter?? + package
+* DONE difference between gauge and counter?? + package
 * TODO répondre à Luca https://github.com/LucaCanali/sparkMeasure/issues/67
 * DONE read MBean doc: https://www.jmdoudoux.fr/java/dej/chap-jmx.htm#jmx-4
 * DONE monitor issue about stagemetrics.print_memory_report()  https://github.com/LucaCanali/sparkMeasure/issues/65
