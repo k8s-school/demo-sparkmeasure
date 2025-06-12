@@ -4,7 +4,7 @@ import java.io.File
 import org.slf4j.LoggerFactory
 import scala.io.Source
 
-import com.codahale.metrics.{Gauge, MetricRegistry}
+import com.codahale.metrics.{Counter, Gauge, MetricRegistry}
 import com.codahale.metrics.jmx.JmxReporter
 
 object DropwizardMetrics {
@@ -24,7 +24,8 @@ object DropwizardMetrics {
   }
 
   // Simple cache local pour éviter double registration
-  private val knownMetrics = scala.collection.mutable.Set[String]()
+  private val knownGauges = scala.collection.mutable.Set[String]()
+  private val knownCounters = scala.collection.mutable.Set[String]()
 
   // Démarre le JMX reporter une seule fois
   private val reporter: JmxReporter = JmxReporter
@@ -37,14 +38,27 @@ object DropwizardMetrics {
   def setGauge(shortname: String, value: Double): Unit = {
     logger.debug(s"[JMX] Setting gauge: $shortname = $value")
     val name = getNamespace() + "." + getPodName() + "." + shortname
-    if (!knownMetrics.contains(name)) {
+    if (!knownGauges.contains(name)) {
       registry.register(name, new Gauge[Double] {
         override def getValue: Double = values.getOrElse(name, 0.0)
       })
-      knownMetrics += name
+      knownGauges += name
     }
     values.update(name, value)
   }
 
+  def setCounter(shortname: String, value: Long): Unit = {
+    logger.debug(s"[JMX] Setting counter: $shortname = $value")
+    val name = getNamespace() + "." + getPodName() + "." + shortname
+    if (!knownCounters.contains(name)) {
+      counters.update(name, registry.counter(name))
+      knownCounters += name
+    }
+    val counter = counters(name)
+    val diff = value - counter.getCount
+    if (diff > 0) counter.inc(diff) else if (diff < 0) counter.dec(-diff)
+  }
+
   private val values = scala.collection.concurrent.TrieMap[String, Double]()
+  private val counters = scala.collection.concurrent.TrieMap[String, Counter]()
 }
