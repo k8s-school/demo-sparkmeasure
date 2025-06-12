@@ -1,7 +1,7 @@
 package ch.cern.metrics
 
 import java.io.File
-
+import org.slf4j.LoggerFactory
 import scala.io.Source
 
 import com.codahale.metrics.{Gauge, MetricRegistry}
@@ -9,6 +9,7 @@ import com.codahale.metrics.jmx.JmxReporter
 
 object DropwizardMetrics {
   val registry = new MetricRegistry()
+  private val logger = LoggerFactory.getLogger(getClass)
 
   private def getNamespace(): String = {
     val path = "/var/run/secrets/kubernetes.io/serviceaccount/namespace"
@@ -34,6 +35,7 @@ object DropwizardMetrics {
   reporter.start()
 
   def setGauge(shortname: String, value: Double): Unit = {
+    logger.debug(s"[JMX] Setting gauge: $shortname = $value")
     val name = getNamespace() + "." + getPodName() + "." + shortname
     if (!knownMetrics.contains(name)) {
       registry.register(name, new Gauge[Double] {

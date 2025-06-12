@@ -1,0 +1,347 @@
+# HELP jmx_config_reload_failure_total Number of times configuration have failed to be reloaded.
+# TYPE jmx_config_reload_failure_total counter
+jmx_config_reload_failure_total 0.0
+# HELP jmx_config_reload_success_total Number of times configuration have successfully been reloaded.
+# TYPE jmx_config_reload_success_total counter
+jmx_config_reload_success_total 0.0
+# HELP jmx_exporter_build_info JMX Exporter build information
+# TYPE jmx_exporter_build_info gauge
+jmx_exporter_build_info{name="jmx_prometheus_javaagent",version="1.1.0"} 1
+# HELP jmx_scrape_cached_beans Number of beans with their matching rule cached
+# TYPE jmx_scrape_cached_beans gauge
+jmx_scrape_cached_beans 0.0
+# HELP jmx_scrape_duration_seconds Time this JMX scrape took, in seconds.
+# TYPE jmx_scrape_duration_seconds gauge
+jmx_scrape_duration_seconds 0.310590493
+# HELP jmx_scrape_error Non-zero if this scrape failed.
+# TYPE jmx_scrape_error gauge
+jmx_scrape_error 0.0
+# HELP jvm_buffer_pool_capacity_bytes Bytes capacity of a given JVM buffer pool.
+# TYPE jvm_buffer_pool_capacity_bytes gauge
+jvm_buffer_pool_capacity_bytes{pool="direct"} 8580062.0
+jvm_buffer_pool_capacity_bytes{pool="mapped"} 0.0
+# HELP jvm_buffer_pool_used_buffers Used buffers of a given JVM buffer pool.
+# TYPE jvm_buffer_pool_used_buffers gauge
+jvm_buffer_pool_used_buffers{pool="direct"} 12.0
+jvm_buffer_pool_used_buffers{pool="mapped"} 0.0
+# HELP jvm_buffer_pool_used_bytes Used bytes of a given JVM buffer pool.
+# TYPE jvm_buffer_pool_used_bytes gauge
+jvm_buffer_pool_used_bytes{pool="direct"} 8580063.0
+jvm_buffer_pool_used_bytes{pool="mapped"} 0.0
+# HELP jvm_classes_currently_loaded The number of classes that are currently loaded in the JVM
+# TYPE jvm_classes_currently_loaded gauge
+jvm_classes_currently_loaded 20878.0
+# HELP jvm_classes_loaded_total The total number of classes that have been loaded since the JVM has started execution
+# TYPE jvm_classes_loaded_total counter
+jvm_classes_loaded_total 21292.0
+# HELP jvm_classes_unloaded_total The total number of classes that have been unloaded since the JVM has started execution
+# TYPE jvm_classes_unloaded_total counter
+jvm_classes_unloaded_total 414.0
+# HELP jvm_compilation_time_seconds_total The total time in seconds taken for HotSpot class compilation
+# TYPE jvm_compilation_time_seconds_total counter
+jvm_compilation_time_seconds_total 18.025
+# HELP jvm_gc_collection_seconds Time spent in a given JVM garbage collector in seconds.
+# TYPE jvm_gc_collection_seconds summary
+jvm_gc_collection_seconds_count{gc="Copy"} 63
+jvm_gc_collection_seconds_sum{gc="Copy"} 0.37
+jvm_gc_collection_seconds_count{gc="MarkSweepCompact"} 7
+jvm_gc_collection_seconds_sum{gc="MarkSweepCompact"} 0.272
+# HELP jvm_memory_committed_bytes Committed (bytes) of a given JVM memory area.
+# TYPE jvm_memory_committed_bytes gauge
+jvm_memory_committed_bytes{area="heap"} 1.44642048E8
+jvm_memory_committed_bytes{area="nonheap"} 2.26500608E8
+# HELP jvm_memory_init_bytes Initial bytes of a given JVM memory area.
+# TYPE jvm_memory_init_bytes gauge
+jvm_memory_init_bytes{area="heap"} 1.4680064E7
+jvm_memory_init_bytes{area="nonheap"} 7667712.0
+# HELP jvm_memory_max_bytes Max (bytes) of a given JVM memory area.
+# TYPE jvm_memory_max_bytes gauge
+jvm_memory_max_bytes{area="heap"} 5.18979584E8
+jvm_memory_max_bytes{area="nonheap"} -1.0
+# HELP jvm_memory_objects_pending_finalization The number of objects waiting in the finalizer queue.
+# TYPE jvm_memory_objects_pending_finalization gauge
+jvm_memory_objects_pending_finalization 0.0
+# HELP jvm_memory_pool_allocated_bytes_total Total bytes allocated in a given JVM memory pool. Only updated after GC, not continuously.
+# TYPE jvm_memory_pool_allocated_bytes_total counter
+jvm_memory_pool_allocated_bytes_total{pool="CodeHeap 'non-nmethods'"} 1687168.0
+jvm_memory_pool_allocated_bytes_total{pool="CodeHeap 'non-profiled nmethods'"} 8295680.0
+jvm_memory_pool_allocated_bytes_total{pool="CodeHeap 'profiled nmethods'"} 3.2547712E7
+jvm_memory_pool_allocated_bytes_total{pool="Compressed Class Space"} 2.1093752E7
+jvm_memory_pool_allocated_bytes_total{pool="Eden Space"} 1.321647008E9
+jvm_memory_pool_allocated_bytes_total{pool="Metaspace"} 1.49015536E8
+jvm_memory_pool_allocated_bytes_total{pool="Survivor Space"} 2.356036E7
+jvm_memory_pool_allocated_bytes_total{pool="Tenured Gen"} 6.4204992E7
+# HELP jvm_memory_pool_collection_committed_bytes Committed after last collection bytes of a given JVM memory pool.
+# TYPE jvm_memory_pool_collection_committed_bytes gauge
+jvm_memory_pool_collection_committed_bytes{pool="Eden Space"} 3.997696E7
+jvm_memory_pool_collection_committed_bytes{pool="Survivor Space"} 4980736.0
+jvm_memory_pool_collection_committed_bytes{pool="Tenured Gen"} 8.1707008E7
+# HELP jvm_memory_pool_collection_init_bytes Initial after last collection bytes of a given JVM memory pool.
+# TYPE jvm_memory_pool_collection_init_bytes gauge
+jvm_memory_pool_collection_init_bytes{pool="Eden Space"} 3932160.0
+jvm_memory_pool_collection_init_bytes{pool="Survivor Space"} 458752.0
+jvm_memory_pool_collection_init_bytes{pool="Tenured Gen"} 9830400.0
+# HELP jvm_memory_pool_collection_max_bytes Max bytes after last collection of a given JVM memory pool.
+# TYPE jvm_memory_pool_collection_max_bytes gauge
+jvm_memory_pool_collection_max_bytes{pool="Eden Space"} 1.43130624E8
+jvm_memory_pool_collection_max_bytes{pool="Survivor Space"} 1.7891328E7
+jvm_memory_pool_collection_max_bytes{pool="Tenured Gen"} 3.57957632E8
+# HELP jvm_memory_pool_collection_used_bytes Used bytes after last collection of a given JVM memory pool.
+# TYPE jvm_memory_pool_collection_used_bytes gauge
+jvm_memory_pool_collection_used_bytes{pool="Eden Space"} 0.0
+jvm_memory_pool_collection_used_bytes{pool="Survivor Space"} 2202440.0
+jvm_memory_pool_collection_used_bytes{pool="Tenured Gen"} 5.9808624E7
+# HELP jvm_memory_pool_committed_bytes Committed bytes of a given JVM memory pool.
+# TYPE jvm_memory_pool_committed_bytes gauge
+jvm_memory_pool_committed_bytes{pool="CodeHeap 'non-nmethods'"} 2555904.0
+jvm_memory_pool_committed_bytes{pool="CodeHeap 'non-profiled nmethods'"} 8388608.0
+jvm_memory_pool_committed_bytes{pool="CodeHeap 'profiled nmethods'"} 3.2702464E7
+jvm_memory_pool_committed_bytes{pool="Compressed Class Space"} 2.514944E7
+jvm_memory_pool_committed_bytes{pool="Eden Space"} 3.997696E7
+jvm_memory_pool_committed_bytes{pool="Metaspace"} 1.57704192E8
+jvm_memory_pool_committed_bytes{pool="Survivor Space"} 4980736.0
+jvm_memory_pool_committed_bytes{pool="Tenured Gen"} 9.9684352E7
+# HELP jvm_memory_pool_init_bytes Initial bytes of a given JVM memory pool.
+# TYPE jvm_memory_pool_init_bytes gauge
+jvm_memory_pool_init_bytes{pool="CodeHeap 'non-nmethods'"} 2555904.0
+jvm_memory_pool_init_bytes{pool="CodeHeap 'non-profiled nmethods'"} 2555904.0
+jvm_memory_pool_init_bytes{pool="CodeHeap 'profiled nmethods'"} 2555904.0
+jvm_memory_pool_init_bytes{pool="Compressed Class Space"} 0.0
+jvm_memory_pool_init_bytes{pool="Eden Space"} 3932160.0
+jvm_memory_pool_init_bytes{pool="Metaspace"} 0.0
+jvm_memory_pool_init_bytes{pool="Survivor Space"} 458752.0
+jvm_memory_pool_init_bytes{pool="Tenured Gen"} 9830400.0
+# HELP jvm_memory_pool_max_bytes Max bytes of a given JVM memory pool.
+# TYPE jvm_memory_pool_max_bytes gauge
+jvm_memory_pool_max_bytes{pool="CodeHeap 'non-nmethods'"} 5828608.0
+jvm_memory_pool_max_bytes{pool="CodeHeap 'non-profiled nmethods'"} 1.22916864E8
+jvm_memory_pool_max_bytes{pool="CodeHeap 'profiled nmethods'"} 1.22912768E8
+jvm_memory_pool_max_bytes{pool="Compressed Class Space"} 1.073741824E9
+jvm_memory_pool_max_bytes{pool="Eden Space"} 1.43130624E8
+jvm_memory_pool_max_bytes{pool="Metaspace"} -1.0
+jvm_memory_pool_max_bytes{pool="Survivor Space"} 1.7891328E7
+jvm_memory_pool_max_bytes{pool="Tenured Gen"} 3.57957632E8
+# HELP jvm_memory_pool_used_bytes Used bytes of a given JVM memory pool.
+# TYPE jvm_memory_pool_used_bytes gauge
+jvm_memory_pool_used_bytes{pool="CodeHeap 'non-nmethods'"} 1687168.0
+jvm_memory_pool_used_bytes{pool="CodeHeap 'non-profiled nmethods'"} 8365824.0
+jvm_memory_pool_used_bytes{pool="CodeHeap 'profiled nmethods'"} 3.2627328E7
+jvm_memory_pool_used_bytes{pool="Compressed Class Space"} 2.1130968E7
+jvm_memory_pool_used_bytes{pool="Eden Space"} 3946960.0
+jvm_memory_pool_used_bytes{pool="Metaspace"} 1.49266168E8
+jvm_memory_pool_used_bytes{pool="Survivor Space"} 2202440.0
+jvm_memory_pool_used_bytes{pool="Tenured Gen"} 5.9808624E7
+# HELP jvm_memory_used_bytes Used bytes of a given JVM memory area.
+# TYPE jvm_memory_used_bytes gauge
+jvm_memory_used_bytes{area="heap"} 6.5958024E7
+jvm_memory_used_bytes{area="nonheap"} 2.13076952E8
+# HELP jvm_runtime_info JVM runtime info
+# TYPE jvm_runtime_info gauge
+jvm_runtime_info{runtime="OpenJDK Runtime Environment",vendor="Eclipse Adoptium",version="11.0.24+8"} 1
+# HELP jvm_threads_current Current thread count of a JVM
+# TYPE jvm_threads_current gauge
+jvm_threads_current 72.0
+# HELP jvm_threads_daemon Daemon thread count of a JVM
+# TYPE jvm_threads_daemon gauge
+jvm_threads_daemon 62.0
+# HELP jvm_threads_deadlocked Cycles of JVM-threads that are in deadlock waiting to acquire object monitors or ownable synchronizers
+# TYPE jvm_threads_deadlocked gauge
+jvm_threads_deadlocked 0.0
+# HELP jvm_threads_deadlocked_monitor Cycles of JVM-threads that are in deadlock waiting to acquire object monitors
+# TYPE jvm_threads_deadlocked_monitor gauge
+jvm_threads_deadlocked_monitor 0.0
+# HELP jvm_threads_peak Peak thread count of a JVM
+# TYPE jvm_threads_peak gauge
+jvm_threads_peak 148.0
+# HELP jvm_threads_started_total Started thread count of a JVM
+# TYPE jvm_threads_started_total counter
+jvm_threads_started_total 237.0
+# HELP jvm_threads_state Current count of threads by state
+# TYPE jvm_threads_state gauge
+jvm_threads_state{state="BLOCKED"} 0.0
+jvm_threads_state{state="NEW"} 0.0
+jvm_threads_state{state="RUNNABLE"} 18.0
+jvm_threads_state{state="TERMINATED"} 0.0
+jvm_threads_state{state="TIMED_WAITING"} 24.0
+jvm_threads_state{state="UNKNOWN"} 0.0
+jvm_threads_state{state="WAITING"} 30.0
+# HELP process_cpu_seconds_total Total user and system CPU time spent in seconds.
+# TYPE process_cpu_seconds_total counter
+process_cpu_seconds_total 26.07
+# HELP process_max_fds Maximum number of open file descriptors.
+# TYPE process_max_fds gauge
+process_max_fds 1048576.0
+# HELP process_open_fds Number of open file descriptors.
+# TYPE process_open_fds gauge
+process_open_fds 335.0
+# HELP process_resident_memory_bytes Resident memory size in bytes.
+# TYPE process_resident_memory_bytes gauge
+process_resident_memory_bytes 4.8791552E8
+# HELP process_start_time_seconds Start time of the process since unix epoch in seconds.
+# TYPE process_start_time_seconds gauge
+process_start_time_seconds 1.749730929196E9
+# HELP process_virtual_memory_bytes Virtual memory size in bytes.
+# TYPE process_virtual_memory_bytes gauge
+process_virtual_memory_bytes 1.2636438528E10
+# HELP spark_driver_codegenerator_compilationtime_type_histograms_count_total Attribute exposed for management metrics:name=spark-demo.spark-sql.driver.CodeGenerator.compilationTime,type=histograms,attribute=Count
+# TYPE spark_driver_codegenerator_compilationtime_type_histograms_count_total counter
+spark_driver_codegenerator_compilationtime_type_histograms_count_total{app_id="spark-sql",app_namespace="spark-demo"} 12.0
+# HELP spark_driver_codegenerator_generatedclasssize_type_histograms_count_total Attribute exposed for management metrics:name=spark-demo.spark-sql.driver.CodeGenerator.generatedClassSize,type=histograms,attribute=Count
+# TYPE spark_driver_codegenerator_generatedclasssize_type_histograms_count_total counter
+spark_driver_codegenerator_generatedclasssize_type_histograms_count_total{app_id="spark-sql",app_namespace="spark-demo"} 24.0
+# HELP spark_driver_codegenerator_generatedmethodsize_type_histograms_count_total Attribute exposed for management metrics:name=spark-demo.spark-sql.driver.CodeGenerator.generatedMethodSize,type=histograms,attribute=Count
+# TYPE spark_driver_codegenerator_generatedmethodsize_type_histograms_count_total counter
+spark_driver_codegenerator_generatedmethodsize_type_histograms_count_total{app_id="spark-sql",app_namespace="spark-demo"} 157.0
+# HELP spark_driver_codegenerator_sourcecodesize_type_histograms_count_total Attribute exposed for management metrics:name=spark-demo.spark-sql.driver.CodeGenerator.sourceCodeSize,type=histograms,attribute=Count
+# TYPE spark_driver_codegenerator_sourcecodesize_type_histograms_count_total counter
+spark_driver_codegenerator_sourcecodesize_type_histograms_count_total{app_id="spark-sql",app_namespace="spark-demo"} 12.0
+# HELP spark_driver_dagscheduler_messageprocessingtime_type_timers_count_total Attribute exposed for management metrics:name=spark-demo.spark-sql.driver.DAGScheduler.messageProcessingTime,type=timers,attribute=Count
+# TYPE spark_driver_dagscheduler_messageprocessingtime_type_timers_count_total counter
+spark_driver_dagscheduler_messageprocessingtime_type_timers_count_total{app_id="spark-sql",app_namespace="spark-demo"} 41.0
+# HELP spark_driver_hiveexternalcatalog_filecachehits_type_counters_count_total Attribute exposed for management metrics:name=spark-demo.spark-sql.driver.HiveExternalCatalog.fileCacheHits,type=counters,attribute=Count
+# TYPE spark_driver_hiveexternalcatalog_filecachehits_type_counters_count_total counter
+spark_driver_hiveexternalcatalog_filecachehits_type_counters_count_total{app_id="spark-sql",app_namespace="spark-demo"} 0.0
+# HELP spark_driver_hiveexternalcatalog_filesdiscovered_type_counters_count_total Attribute exposed for management metrics:name=spark-demo.spark-sql.driver.HiveExternalCatalog.filesDiscovered,type=counters,attribute=Count
+# TYPE spark_driver_hiveexternalcatalog_filesdiscovered_type_counters_count_total counter
+spark_driver_hiveexternalcatalog_filesdiscovered_type_counters_count_total{app_id="spark-sql",app_namespace="spark-demo"} 0.0
+# HELP spark_driver_hiveexternalcatalog_hiveclientcalls_type_counters_count_total Attribute exposed for management metrics:name=spark-demo.spark-sql.driver.HiveExternalCatalog.hiveClientCalls,type=counters,attribute=Count
+# TYPE spark_driver_hiveexternalcatalog_hiveclientcalls_type_counters_count_total counter
+spark_driver_hiveexternalcatalog_hiveclientcalls_type_counters_count_total{app_id="spark-sql",app_namespace="spark-demo"} 0.0
+# HELP spark_driver_hiveexternalcatalog_parallellistingjobcount_type_counters_count_total Attribute exposed for management metrics:name=spark-demo.spark-sql.driver.HiveExternalCatalog.parallelListingJobCount,type=counters,attribute=Count
+# TYPE spark_driver_hiveexternalcatalog_parallellistingjobcount_type_counters_count_total counter
+spark_driver_hiveexternalcatalog_parallellistingjobcount_type_counters_count_total{app_id="spark-sql",app_namespace="spark-demo"} 0.0
+# HELP spark_driver_hiveexternalcatalog_partitionsfetched_type_counters_count_total Attribute exposed for management metrics:name=spark-demo.spark-sql.driver.HiveExternalCatalog.partitionsFetched,type=counters,attribute=Count
+# TYPE spark_driver_hiveexternalcatalog_partitionsfetched_type_counters_count_total counter
+spark_driver_hiveexternalcatalog_partitionsfetched_type_counters_count_total{app_id="spark-sql",app_namespace="spark-demo"} 0.0
+# HELP spark_driver_livelistenerbus_listenerprocessingtime_ch_cern_sparkmeasure_stageinforecorderlistener_type_timers_count_total Attribute exposed for management metrics:name=spark-demo.spark-sql.driver.LiveListenerBus.listenerProcessingTime.ch.cern.sparkmeasure.StageInfoRecorderListener,type=timers,attribute=Count
+# TYPE spark_driver_livelistenerbus_listenerprocessingtime_ch_cern_sparkmeasure_stageinforecorderlistener_type_timers_count_total counter
+spark_driver_livelistenerbus_listenerprocessingtime_ch_cern_sparkmeasure_stageinforecorderlistener_type_timers_count_total{app_id="spark-sql",app_namespace="spark-demo"} 586.0
+# HELP spark_driver_livelistenerbus_listenerprocessingtime_org_apache_spark_heartbeatreceiver_type_timers_count_total Attribute exposed for management metrics:name=spark-demo.spark-sql.driver.LiveListenerBus.listenerProcessingTime.org.apache.spark.HeartbeatReceiver,type=timers,attribute=Count
+# TYPE spark_driver_livelistenerbus_listenerprocessingtime_org_apache_spark_heartbeatreceiver_type_timers_count_total counter
+spark_driver_livelistenerbus_listenerprocessingtime_org_apache_spark_heartbeatreceiver_type_timers_count_total{app_id="spark-sql",app_namespace="spark-demo"} 592.0
+# HELP spark_driver_livelistenerbus_listenerprocessingtime_org_apache_spark_sql_execution_ui_sqlappstatuslistener_type_timers_count_total Attribute exposed for management metrics:name=spark-demo.spark-sql.driver.LiveListenerBus.listenerProcessingTime.org.apache.spark.sql.execution.ui.SQLAppStatusListener,type=timers,attribute=Count
+# TYPE spark_driver_livelistenerbus_listenerprocessingtime_org_apache_spark_sql_execution_ui_sqlappstatuslistener_type_timers_count_total counter
+spark_driver_livelistenerbus_listenerprocessingtime_org_apache_spark_sql_execution_ui_sqlappstatuslistener_type_timers_count_total{app_id="spark-sql",app_namespace="spark-demo"} 586.0
+# HELP spark_driver_livelistenerbus_listenerprocessingtime_org_apache_spark_status_appstatuslistener_type_timers_count_total Attribute exposed for management metrics:name=spark-demo.spark-sql.driver.LiveListenerBus.listenerProcessingTime.org.apache.spark.status.AppStatusListener,type=timers,attribute=Count
+# TYPE spark_driver_livelistenerbus_listenerprocessingtime_org_apache_spark_status_appstatuslistener_type_timers_count_total counter
+spark_driver_livelistenerbus_listenerprocessingtime_org_apache_spark_status_appstatuslistener_type_timers_count_total{app_id="spark-sql",app_namespace="spark-demo"} 592.0
+# HELP spark_driver_livelistenerbus_numeventsposted_type_counters_count_total Attribute exposed for management metrics:name=spark-demo.spark-sql.driver.LiveListenerBus.numEventsPosted,type=counters,attribute=Count
+# TYPE spark_driver_livelistenerbus_numeventsposted_type_counters_count_total counter
+spark_driver_livelistenerbus_numeventsposted_type_counters_count_total{app_id="spark-sql",app_namespace="spark-demo"} 592.0
+# HELP spark_driver_livelistenerbus_queue_appstatus_listenerprocessingtime_type_timers_count_total Attribute exposed for management metrics:name=spark-demo.spark-sql.driver.LiveListenerBus.queue.appStatus.listenerProcessingTime,type=timers,attribute=Count
+# TYPE spark_driver_livelistenerbus_queue_appstatus_listenerprocessingtime_type_timers_count_total counter
+spark_driver_livelistenerbus_queue_appstatus_listenerprocessingtime_type_timers_count_total{app_id="spark-sql",app_namespace="spark-demo"} 592.0
+# HELP spark_driver_livelistenerbus_queue_appstatus_numdroppedevents_type_counters_count_total Attribute exposed for management metrics:name=spark-demo.spark-sql.driver.LiveListenerBus.queue.appStatus.numDroppedEvents,type=counters,attribute=Count
+# TYPE spark_driver_livelistenerbus_queue_appstatus_numdroppedevents_type_counters_count_total counter
+spark_driver_livelistenerbus_queue_appstatus_numdroppedevents_type_counters_count_total{app_id="spark-sql",app_namespace="spark-demo"} 0.0
+# HELP spark_driver_livelistenerbus_queue_appstatus_size_type_gauges Attribute exposed for management metrics:name=spark-demo.spark-sql.driver.LiveListenerBus.queue.appStatus.size,type=gauges,attribute=Value
+# TYPE spark_driver_livelistenerbus_queue_appstatus_size_type_gauges gauge
+spark_driver_livelistenerbus_queue_appstatus_size_type_gauges{app_id="spark-sql",app_namespace="spark-demo"} 0.0
+# HELP spark_driver_livelistenerbus_queue_executormanagement_listenerprocessingtime_type_timers_count_total Attribute exposed for management metrics:name=spark-demo.spark-sql.driver.LiveListenerBus.queue.executorManagement.listenerProcessingTime,type=timers,attribute=Count
+# TYPE spark_driver_livelistenerbus_queue_executormanagement_listenerprocessingtime_type_timers_count_total counter
+spark_driver_livelistenerbus_queue_executormanagement_listenerprocessingtime_type_timers_count_total{app_id="spark-sql",app_namespace="spark-demo"} 592.0
+# HELP spark_driver_livelistenerbus_queue_executormanagement_numdroppedevents_type_counters_count_total Attribute exposed for management metrics:name=spark-demo.spark-sql.driver.LiveListenerBus.queue.executorManagement.numDroppedEvents,type=counters,attribute=Count
+# TYPE spark_driver_livelistenerbus_queue_executormanagement_numdroppedevents_type_counters_count_total counter
+spark_driver_livelistenerbus_queue_executormanagement_numdroppedevents_type_counters_count_total{app_id="spark-sql",app_namespace="spark-demo"} 0.0
+# HELP spark_driver_livelistenerbus_queue_executormanagement_size_type_gauges Attribute exposed for management metrics:name=spark-demo.spark-sql.driver.LiveListenerBus.queue.executorManagement.size,type=gauges,attribute=Value
+# TYPE spark_driver_livelistenerbus_queue_executormanagement_size_type_gauges gauge
+spark_driver_livelistenerbus_queue_executormanagement_size_type_gauges{app_id="spark-sql",app_namespace="spark-demo"} 0.0
+# HELP spark_driver_livelistenerbus_queue_shared_listenerprocessingtime_type_timers_count_total Attribute exposed for management metrics:name=spark-demo.spark-sql.driver.LiveListenerBus.queue.shared.listenerProcessingTime,type=timers,attribute=Count
+# TYPE spark_driver_livelistenerbus_queue_shared_listenerprocessingtime_type_timers_count_total counter
+spark_driver_livelistenerbus_queue_shared_listenerprocessingtime_type_timers_count_total{app_id="spark-sql",app_namespace="spark-demo"} 586.0
+# HELP spark_driver_livelistenerbus_queue_shared_numdroppedevents_type_counters_count_total Attribute exposed for management metrics:name=spark-demo.spark-sql.driver.LiveListenerBus.queue.shared.numDroppedEvents,type=counters,attribute=Count
+# TYPE spark_driver_livelistenerbus_queue_shared_numdroppedevents_type_counters_count_total counter
+spark_driver_livelistenerbus_queue_shared_numdroppedevents_type_counters_count_total{app_id="spark-sql",app_namespace="spark-demo"} 0.0
+# HELP spark_driver_livelistenerbus_queue_shared_size_type_gauges Attribute exposed for management metrics:name=spark-demo.spark-sql.driver.LiveListenerBus.queue.shared.size,type=gauges,attribute=Value
+# TYPE spark_driver_livelistenerbus_queue_shared_size_type_gauges gauge
+spark_driver_livelistenerbus_queue_shared_size_type_gauges{app_id="spark-sql",app_namespace="spark-demo"} 0.0
+# HELP sparkmeasure_bytesread Attribute exposed for management sparkmeasure.metrics:name=spark-demo.spark-sql-driver.bytesRead,type=gauges,attribute=Value
+# TYPE sparkmeasure_bytesread gauge
+sparkmeasure_bytesread{app_id="spark-sql-driver",app_namespace="spark-demo"} 0.0
+# HELP sparkmeasure_byteswritten Attribute exposed for management sparkmeasure.metrics:name=spark-demo.spark-sql-driver.bytesWritten,type=gauges,attribute=Value
+# TYPE sparkmeasure_byteswritten gauge
+sparkmeasure_byteswritten{app_id="spark-sql-driver",app_namespace="spark-demo"} 0.0
+# HELP sparkmeasure_diskbytesspilled Attribute exposed for management sparkmeasure.metrics:name=spark-demo.spark-sql-driver.diskBytesSpilled,type=gauges,attribute=Value
+# TYPE sparkmeasure_diskbytesspilled gauge
+sparkmeasure_diskbytesspilled{app_id="spark-sql-driver",app_namespace="spark-demo"} 0.0
+# HELP sparkmeasure_elapsedtime Attribute exposed for management sparkmeasure.metrics:name=spark-demo.spark-sql-driver.elapsedTime,type=gauges,attribute=Value
+# TYPE sparkmeasure_elapsedtime gauge
+sparkmeasure_elapsedtime{app_id="spark-sql-driver",app_namespace="spark-demo"} 1745.0
+# HELP sparkmeasure_executorcputime Attribute exposed for management sparkmeasure.metrics:name=spark-demo.spark-sql-driver.executorCpuTime,type=gauges,attribute=Value
+# TYPE sparkmeasure_executorcputime gauge
+sparkmeasure_executorcputime{app_id="spark-sql-driver",app_namespace="spark-demo"} 671.0
+# HELP sparkmeasure_executordeserializecputime Attribute exposed for management sparkmeasure.metrics:name=spark-demo.spark-sql-driver.executorDeserializeCpuTime,type=gauges,attribute=Value
+# TYPE sparkmeasure_executordeserializecputime gauge
+sparkmeasure_executordeserializecputime{app_id="spark-sql-driver",app_namespace="spark-demo"} 240.0
+# HELP sparkmeasure_executordeserializetime Attribute exposed for management sparkmeasure.metrics:name=spark-demo.spark-sql-driver.executorDeserializeTime,type=gauges,attribute=Value
+# TYPE sparkmeasure_executordeserializetime gauge
+sparkmeasure_executordeserializetime{app_id="spark-sql-driver",app_namespace="spark-demo"} 294.0
+# HELP sparkmeasure_executorruntime Attribute exposed for management sparkmeasure.metrics:name=spark-demo.spark-sql-driver.executorRunTime,type=gauges,attribute=Value
+# TYPE sparkmeasure_executorruntime gauge
+sparkmeasure_executorruntime{app_id="spark-sql-driver",app_namespace="spark-demo"} 758.0
+# HELP sparkmeasure_jvmgctime Attribute exposed for management sparkmeasure.metrics:name=spark-demo.spark-sql-driver.jvmGCTime,type=gauges,attribute=Value
+# TYPE sparkmeasure_jvmgctime gauge
+sparkmeasure_jvmgctime{app_id="spark-sql-driver",app_namespace="spark-demo"} 9.0
+# HELP sparkmeasure_memorybytesspilled Attribute exposed for management sparkmeasure.metrics:name=spark-demo.spark-sql-driver.memoryBytesSpilled,type=gauges,attribute=Value
+# TYPE sparkmeasure_memorybytesspilled gauge
+sparkmeasure_memorybytesspilled{app_id="spark-sql-driver",app_namespace="spark-demo"} 0.0
+# HELP sparkmeasure_numstages Attribute exposed for management sparkmeasure.metrics:name=spark-demo.spark-sql-driver.numStages,type=gauges,attribute=Value
+# TYPE sparkmeasure_numstages gauge
+sparkmeasure_numstages{app_id="spark-sql-driver",app_namespace="spark-demo"} 3.0
+# HELP sparkmeasure_numtasks Attribute exposed for management sparkmeasure.metrics:name=spark-demo.spark-sql-driver.numTasks,type=gauges,attribute=Value
+# TYPE sparkmeasure_numtasks gauge
+sparkmeasure_numtasks{app_id="spark-sql-driver",app_namespace="spark-demo"} 5.0
+# HELP sparkmeasure_peakexecutionmemory Attribute exposed for management sparkmeasure.metrics:name=spark-demo.spark-sql-driver.peakExecutionMemory,type=gauges,attribute=Value
+# TYPE sparkmeasure_peakexecutionmemory gauge
+sparkmeasure_peakexecutionmemory{app_id="spark-sql-driver",app_namespace="spark-demo"} 0.0
+# HELP sparkmeasure_recordsread Attribute exposed for management sparkmeasure.metrics:name=spark-demo.spark-sql-driver.recordsRead,type=gauges,attribute=Value
+# TYPE sparkmeasure_recordsread gauge
+sparkmeasure_recordsread{app_id="spark-sql-driver",app_namespace="spark-demo"} 2000.0
+# HELP sparkmeasure_recordswritten Attribute exposed for management sparkmeasure.metrics:name=spark-demo.spark-sql-driver.recordsWritten,type=gauges,attribute=Value
+# TYPE sparkmeasure_recordswritten gauge
+sparkmeasure_recordswritten{app_id="spark-sql-driver",app_namespace="spark-demo"} 0.0
+# HELP sparkmeasure_resultserializationtime Attribute exposed for management sparkmeasure.metrics:name=spark-demo.spark-sql-driver.resultSerializationTime,type=gauges,attribute=Value
+# TYPE sparkmeasure_resultserializationtime gauge
+sparkmeasure_resultserializationtime{app_id="spark-sql-driver",app_namespace="spark-demo"} 12.0
+# HELP sparkmeasure_resultsize Attribute exposed for management sparkmeasure.metrics:name=spark-demo.spark-sql-driver.resultSize,type=gauges,attribute=Value
+# TYPE sparkmeasure_resultsize gauge
+sparkmeasure_resultsize{app_id="spark-sql-driver",app_namespace="spark-demo"} 4006.0
+# HELP sparkmeasure_shufflebyteswritten Attribute exposed for management sparkmeasure.metrics:name=spark-demo.spark-sql-driver.shuffleBytesWritten,type=gauges,attribute=Value
+# TYPE sparkmeasure_shufflebyteswritten gauge
+sparkmeasure_shufflebyteswritten{app_id="spark-sql-driver",app_namespace="spark-demo"} 116.0
+# HELP sparkmeasure_shufflefetchwaittime Attribute exposed for management sparkmeasure.metrics:name=spark-demo.spark-sql-driver.shuffleFetchWaitTime,type=gauges,attribute=Value
+# TYPE sparkmeasure_shufflefetchwaittime gauge
+sparkmeasure_shufflefetchwaittime{app_id="spark-sql-driver",app_namespace="spark-demo"} 0.0
+# HELP sparkmeasure_shufflelocalblocksfetched Attribute exposed for management sparkmeasure.metrics:name=spark-demo.spark-sql-driver.shuffleLocalBlocksFetched,type=gauges,attribute=Value
+# TYPE sparkmeasure_shufflelocalblocksfetched gauge
+sparkmeasure_shufflelocalblocksfetched{app_id="spark-sql-driver",app_namespace="spark-demo"} 2.0
+# HELP sparkmeasure_shufflelocalbytesread Attribute exposed for management sparkmeasure.metrics:name=spark-demo.spark-sql-driver.shuffleLocalBytesRead,type=gauges,attribute=Value
+# TYPE sparkmeasure_shufflelocalbytesread gauge
+sparkmeasure_shufflelocalbytesread{app_id="spark-sql-driver",app_namespace="spark-demo"} 116.0
+# HELP sparkmeasure_shufflerecordsread Attribute exposed for management sparkmeasure.metrics:name=spark-demo.spark-sql-driver.shuffleRecordsRead,type=gauges,attribute=Value
+# TYPE sparkmeasure_shufflerecordsread gauge
+sparkmeasure_shufflerecordsread{app_id="spark-sql-driver",app_namespace="spark-demo"} 2.0
+# HELP sparkmeasure_shufflerecordswritten Attribute exposed for management sparkmeasure.metrics:name=spark-demo.spark-sql-driver.shuffleRecordsWritten,type=gauges,attribute=Value
+# TYPE sparkmeasure_shufflerecordswritten gauge
+sparkmeasure_shufflerecordswritten{app_id="spark-sql-driver",app_namespace="spark-demo"} 2.0
+# HELP sparkmeasure_shuffleremoteblocksfetched Attribute exposed for management sparkmeasure.metrics:name=spark-demo.spark-sql-driver.shuffleRemoteBlocksFetched,type=gauges,attribute=Value
+# TYPE sparkmeasure_shuffleremoteblocksfetched gauge
+sparkmeasure_shuffleremoteblocksfetched{app_id="spark-sql-driver",app_namespace="spark-demo"} 0.0
+# HELP sparkmeasure_shuffleremotebytesread Attribute exposed for management sparkmeasure.metrics:name=spark-demo.spark-sql-driver.shuffleRemoteBytesRead,type=gauges,attribute=Value
+# TYPE sparkmeasure_shuffleremotebytesread gauge
+sparkmeasure_shuffleremotebytesread{app_id="spark-sql-driver",app_namespace="spark-demo"} 0.0
+# HELP sparkmeasure_shuffleremotebytesreadtodisk Attribute exposed for management sparkmeasure.metrics:name=spark-demo.spark-sql-driver.shuffleRemoteBytesReadToDisk,type=gauges,attribute=Value
+# TYPE sparkmeasure_shuffleremotebytesreadtodisk gauge
+sparkmeasure_shuffleremotebytesreadtodisk{app_id="spark-sql-driver",app_namespace="spark-demo"} 0.0
+# HELP sparkmeasure_shuffletotalblocksfetched Attribute exposed for management sparkmeasure.metrics:name=spark-demo.spark-sql-driver.shuffleTotalBlocksFetched,type=gauges,attribute=Value
+# TYPE sparkmeasure_shuffletotalblocksfetched gauge
+sparkmeasure_shuffletotalblocksfetched{app_id="spark-sql-driver",app_namespace="spark-demo"} 2.0
+# HELP sparkmeasure_shuffletotalbytesread Attribute exposed for management sparkmeasure.metrics:name=spark-demo.spark-sql-driver.shuffleTotalBytesRead,type=gauges,attribute=Value
+# TYPE sparkmeasure_shuffletotalbytesread gauge
+sparkmeasure_shuffletotalbytesread{app_id="spark-sql-driver",app_namespace="spark-demo"} 116.0
+# HELP sparkmeasure_shufflewritetime Attribute exposed for management sparkmeasure.metrics:name=spark-demo.spark-sql-driver.shuffleWriteTime,type=gauges,attribute=Value
+# TYPE sparkmeasure_shufflewritetime gauge
+sparkmeasure_shufflewritetime{app_id="spark-sql-driver",app_namespace="spark-demo"} 5.0
+# HELP sparkmeasure_stageduration Attribute exposed for management sparkmeasure.metrics:name=spark-demo.spark-sql-driver.stageDuration,type=gauges,attribute=Value
+# TYPE sparkmeasure_stageduration gauge
+sparkmeasure_stageduration{app_id="spark-sql-driver",app_namespace="spark-demo"} 1356.0
