@@ -28,7 +28,7 @@ def main():
 
     # Callback foreachBatch avec StageMetrics
     def process_batch(df, epoch_id):
-        stagemetrics = StageMetrics(spark.sparkContext)
+        stagemetrics = StageMetrics(spark)
         stagemetrics.begin()
 
         df.cache().count()  # force plan exécution
