@@ -36,7 +36,9 @@ def main():
 
         # Sauvegarde dans un fichier local JSON
         timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+        print("\n----------------------")
         print(f"Metrics data for {timestamp}")
+        print("----------------------")
         # print report to standard output
         stagemetrics.print_report()
 
