@@ -5,21 +5,18 @@ To run this example, you need to have a TCP server sending text data to the spec
 """
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import explode, split
-# from sparkmeasure import SQLMetrics
+from sparkmeasure import StageMetrics
+import datetime
 
 
 def main():
     spark = SparkSession.builder \
-        .appName("StructuredStreamingWordCount") \
+        .appName("StructuredStreamingWordCountWithStageMetrics") \
         .getOrCreate()
 
     spark.sparkContext.setLogLevel("WARN")
 
-    # Configure sparkmeasure
-    # sql_metrics = SQLMetrics(spark)
-    # sql_metrics.begin()
-
-    # Stream depuis Netcat
+    # Lecture depuis netcat TCP (Kubernetes Service)
     lines = spark.readStream \
         .format("socket") \
         .option("host", "word-emitter.word-emitter") \
@@ -29,26 +26,31 @@ def main():
     words = lines.select(explode(split(lines.value, " ")).alias("word"))
     word_counts = words.groupBy("word").count()
 
-    # # Mesure de performance via transform()
-    # def instrumented(df):
-    #     # spark-measure hook
-    #     sql_metrics.begin()
-    #     df.cache().count()  # force l'exécution
-    #     sql_metrics.end()
-    #     sql_metrics.print_report()
-    #     return df
+    # Callback foreachBatch avec StageMetrics
+    def process_batch(df, epoch_id):
+        stagemetrics = StageMetrics(spark.sparkContext)
+        stagemetrics.begin()
 
-    # word_counts = word_counts.transform(instrumented)
+        df.cache().count()  # force plan exécution
+        stagemetrics.end()
 
+        # Sauvegarde dans un fichier local JSON
+        timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+        metrics_json = stagemetrics.dump()
+        with open(f"/tmp/stagemetrics_{timestamp}.json", "w") as f:
+            f.write(metrics_json)
+
+        print(f"[{timestamp}] Metrics written for epoch {epoch_id}")
+
+    # Définir le pipeline avec foreachBatch
     query = word_counts.writeStream \
         .outputMode("complete") \
-        .format("console") \
-        .option("truncate", False) \
+        .foreachBatch(process_batch) \
         .option("checkpointLocation", "/tmp/spark-checkpoint/wordcount") \
         .start()
 
     query.awaitTermination()
 
+
 if __name__ == "__main__":
     main()
-
