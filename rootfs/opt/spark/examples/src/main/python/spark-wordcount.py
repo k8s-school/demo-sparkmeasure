@@ -27,7 +27,7 @@ def main():
     word_counts = words.groupBy("word").count()
 
     # Callback foreachBatch avec StageMetrics
-    def process_batch(df, epoch_id):
+    def process_batch(df, batch_id):
         stagemetrics = StageMetrics(spark)
         stagemetrics.begin()
 
@@ -37,7 +37,7 @@ def main():
         # Sauvegarde dans un fichier local JSON
         timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
         print("\n----------------------")
-        print(f"Metrics data for {timestamp}")
+        print(f"Metrics data for batch {batch_id} at {timestamp}")
         print("----------------------")
         # print report to standard output
         stagemetrics.print_report()
