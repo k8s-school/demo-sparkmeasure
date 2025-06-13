@@ -36,11 +36,13 @@ def main():
 
         # Sauvegarde dans un fichier local JSON
         timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
-        metrics_json = stagemetrics.dump()
-        with open(f"/tmp/stagemetrics_{timestamp}.json", "w") as f:
-            f.write(metrics_json)
+        print(f"Metrics data for {timestamp}")
+        # print report to standard output
+        stagemetrics.print_report()
 
-        print(f"[{timestamp}] Metrics written for epoch {epoch_id}")
+        # get metrics data as a dictionary
+        metrics = stagemetrics.aggregate_stagemetrics()
+        print(f"metrics elapsedTime = {metrics.get('elapsedTime')}")
 
     # Définir le pipeline avec foreachBatch
     query = word_counts.writeStream \
