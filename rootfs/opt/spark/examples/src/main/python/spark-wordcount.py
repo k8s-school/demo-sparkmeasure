@@ -5,7 +5,7 @@ To run this example, you need to have a TCP server sending text data to the spec
 """
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import explode, split
-from sparkmeasure import SQLMetrics
+# from sparkmeasure import SQLMetrics
 
 
 def main():
@@ -16,8 +16,8 @@ def main():
     spark.sparkContext.setLogLevel("WARN")
 
     # Configure sparkmeasure
-    sql_metrics = SQLMetrics(spark)
-    sql_metrics.begin()
+    # sql_metrics = SQLMetrics(spark)
+    # sql_metrics.begin()
 
     # Stream depuis Netcat
     lines = spark.readStream \
@@ -29,16 +29,16 @@ def main():
     words = lines.select(explode(split(lines.value, " ")).alias("word"))
     word_counts = words.groupBy("word").count()
 
-    # Mesure de performance via transform()
-    def instrumented(df):
-        # spark-measure hook
-        sql_metrics.begin()
-        df.cache().count()  # force l'exécution
-        sql_metrics.end()
-        sql_metrics.print_report()
-        return df
+    # # Mesure de performance via transform()
+    # def instrumented(df):
+    #     # spark-measure hook
+    #     sql_metrics.begin()
+    #     df.cache().count()  # force l'exécution
+    #     sql_metrics.end()
+    #     sql_metrics.print_report()
+    #     return df
 
-    word_counts = word_counts.transform(instrumented)
+    # word_counts = word_counts.transform(instrumented)
 
     query = word_counts.writeStream \
         .outputMode("complete") \
@@ -48,7 +48,6 @@ def main():
         .start()
 
     query.awaitTermination()
-
 
 if __name__ == "__main__":
     main()
