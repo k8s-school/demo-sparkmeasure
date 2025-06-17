@@ -11,23 +11,7 @@ from pyspark.sql import SparkSession
 from sparkmeasure import StageMetrics
 from typing import Union, Dict
 
-
-def publish_metrics(spark_session, metrics: Dict[str, Union[float, int]]):
-    try:
-        publish_metrics_count = 0
-        dropwizard = spark_session._jvm.ch.cern.metrics.DropwizardMetrics
-        for key, value in metrics.items():
-            dropwizard.setCounter(key, float(value))
-            # Example counter to track the number of times metrics have been published
-            publish_metrics_count += 1
-
-        dropwizard.setCounter("metrics_published_total", publish_metrics_count)
-
-        print(f"[INFO] {len(metrics)} Dropwizard metrics published via JMX")
-    except Exception as e:
-        print(f"[ERROR] Failed to publish Dropwizard metrics: {e}")
-
-
+import metrics
 
 def run_my_workload(spark):
 
@@ -44,7 +28,7 @@ def run_my_workload(spark):
     metrics = stagemetrics.aggregate_stagemetrics()
     print(f"metrics elapsedTime = {metrics.get('elapsedTime')}")
 
-    publish_metrics(spark, metrics)
+    metrics.publish_metrics(spark, metrics)
 
     # save session metrics data in json format (default)
     df = stagemetrics.create_stagemetrics_DF("PerfStageMetrics")
@@ -52,7 +36,6 @@ def run_my_workload(spark):
 
     aggregatedDF = stagemetrics.aggregate_stagemetrics_DF("PerfStageMetrics")
     stagemetrics.save_data(aggregatedDF, "/tmp/stagemetrics_report_test2")
-
 
 if __name__ == "__main__":
     # The Spark session is expected to be already up, created by spark-submit,

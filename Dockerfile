@@ -15,6 +15,8 @@ ARG spark_uid=185
 ENV spark_uid ${spark_uid}
 USER ${spark_uid}
 
+ENV PYTHONPATH /opt/spark/python
+
 # Exposer le port Spark
 EXPOSE 4040
 
