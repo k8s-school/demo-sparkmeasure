@@ -1,3 +1,4 @@
+from typing import Union, Dict
 
 from sparkmeasure import StageMetrics
 

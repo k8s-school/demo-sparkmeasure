@@ -9,7 +9,6 @@ Run with:
 import time
 from pyspark.sql import SparkSession
 from sparkmeasure import StageMetrics
-from typing import Union, Dict
 
 import metrics
 
