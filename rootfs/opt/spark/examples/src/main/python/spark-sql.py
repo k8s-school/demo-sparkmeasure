@@ -24,10 +24,10 @@ def run_my_workload(spark):
     stagemetrics.print_report()
 
     # get metrics data as a dictionary
-    metrics = stagemetrics.aggregate_stagemetrics()
-    print(f"metrics elapsedTime = {metrics.get('elapsedTime')}")
+    current_metrics = stagemetrics.aggregate_stagemetrics()
+    print(f"metrics elapsedTime = {current_metrics.get('elapsedTime')}")
 
-    metrics.publish_metrics(spark, metrics)
+    metrics.publish_metrics(spark, current_metrics)
 
     # save session metrics data in json format (default)
     df = stagemetrics.create_stagemetrics_DF("PerfStageMetrics")

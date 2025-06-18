@@ -47,7 +47,7 @@ object DropwizardMetrics {
     gauges.update(name, value)
   }
 
-  def setCounter(shortname: String, value: Long): Unit = {
+  def setCounter(shortname: String, value: Double): Unit = {
     logger.info(s"[JMX] Setting counter: $shortname = $value")
     val name = getNamespace() + "." + getPodName() + "." + shortname
     if (!knownCounters.contains(name)) {
@@ -60,5 +60,5 @@ object DropwizardMetrics {
   }
 
   private val gauges = scala.collection.concurrent.TrieMap[String, Double]()
-  private val counters = scala.collection.concurrent.TrieMap[String, Long]()
+  private val counters = scala.collection.concurrent.TrieMap[String, Double]()
 }
