@@ -30,11 +30,11 @@ def publish_metrics(spark_session, metrics: Dict[str, Union[float, int]]):
         dropwizard = spark_session._jvm.ch.cern.metrics.DropwizardMetrics
         for key, value in metrics.items():
             # or setGauge
-            dropwizard.setCounter(key, float(value))
+            dropwizard.setMetrics(key, float(value), False)
             # Example counter to track the number of times metrics have been published
             publish_metrics_count += 1
 
-        dropwizard.setCounter("metrics_published_total", publish_metrics_count)
+        dropwizard.setCounter("metrics_published_total", publish_metrics_count, True)
 
         print(f"[INFO] {len(metrics)} Dropwizard metrics published via JMX")
     except Exception as e:
