@@ -1,10 +1,11 @@
 from typing import Union, Dict
 
 from sparkmeasure import StageMetrics
+import datetime
 
 # Callback foreachBatch avec StageMetrics
-def process_batch(df, batch_id):
-    stagemetrics = StageMetrics(spark)
+def process_batch(df, batch_id, spark_session):
+    stagemetrics = StageMetrics(spark_session)
     stagemetrics.begin()
 
     df.cache().count()  # force plan exécution

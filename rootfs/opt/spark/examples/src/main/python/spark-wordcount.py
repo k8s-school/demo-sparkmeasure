@@ -31,7 +31,7 @@ def main():
     # Définir le pipeline avec foreachBatch
     query = word_counts.writeStream \
         .outputMode("complete") \
-        .foreachBatch(metrics.process_batch) \
+        .foreachBatch(lambda df, batch_id: metrics.process_batch(df, batch_id, spark)) \
         .option("checkpointLocation", "/tmp/spark-checkpoint/wordcount") \
         .start()
 
