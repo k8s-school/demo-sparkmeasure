@@ -41,9 +41,8 @@ object DropwizardMetrics {
 
     val metricSet = if (isCounter) knownCounters else knownGauges
     val storage = if (isCounter) counters else gauges
-    val log = if (isCounter) logger.info _ else logger.debug _
 
-    log(s"[JMX] Setting $kind: $shortname = $value")
+    logger.info(s"[JMX] Setting $kind: $shortname = $value")
 
     if (!metricSet.contains(name)) {
       registry.register(name, new Gauge[Double] {
