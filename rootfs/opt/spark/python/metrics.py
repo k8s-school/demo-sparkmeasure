@@ -1,7 +1,10 @@
 from typing import Union, Dict
 
+import logging
 from sparkmeasure import StageMetrics
 import datetime
+
+logger = logging.getLogger(__name__)
 
 # Callback foreachBatch avec StageMetrics
 def process_batch(df, batch_id, spark_session):
@@ -13,15 +16,15 @@ def process_batch(df, batch_id, spark_session):
 
     # Sauvegarde dans un fichier local JSON
     timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
-    print("\n----------------------")
-    print(f"Metrics data for batch {batch_id} at {timestamp}")
-    print("----------------------")
+    logger.info("\n----------------------")
+    logger.info("Metrics data for batch %s at %s", batch_id, timestamp)
+    logger.info("----------------------")
     # print report to standard output
     stagemetrics.print_report()
 
     # get metrics data as a dictionary
     metrics = stagemetrics.aggregate_stagemetrics()
-    print(f"metrics elapsedTime = {metrics.get('elapsedTime')}")
+    logger.info("metrics elapsedTime = %s", metrics.get('elapsedTime'))
 
 
 def publish_metrics(spark_session, metrics: Dict[str, Union[float, int]]):
@@ -36,6 +39,6 @@ def publish_metrics(spark_session, metrics: Dict[str, Union[float, int]]):
 
         dropwizard.setMetric("metrics_published_total", publish_metrics_count, True)
 
-        print(f"[INFO] {len(metrics)} Dropwizard metrics published via JMX")
+        logger.info("%d Dropwizard metrics published via JMX", len(metrics))
     except Exception as e:
-        print(f"[ERROR] Failed to publish Dropwizard metrics: {e}")
+        logger.error("Failed to publish Dropwizard metrics: %s", e)
