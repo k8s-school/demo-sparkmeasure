@@ -7,17 +7,17 @@ data:
     lowercaseOutputName: true
     attrNameSnakeCase: true
     rules:
-      - pattern: ".*"
-        name: jmx_debug_all
-        type: GAUGE
-      - pattern: sparkmeasure\.metrics<name=(\S+)\.(\S+)\.(\S+),\s*type=gauges><>Value
+      # - pattern: ".*"
+      #   name: jmx_debug_all
+      #   type: GAUGE
+      - pattern: sparkmeasure\.metrics<name=(\S+)\.(\S+)\.(\S+)\.(gauge),\s*type=gauges><>Value
         name: sparkmeasure_$3
         type: GAUGE
         labels:
           app_namespace: "$1"
           app_id: "$2"
-      - pattern: sparkmeasure\.metrics<name=(\S+)\.(\S+)\.(\S+),\s*type=counters><>Count
-        name: sparkmeasure_$3_total
+      - pattern: sparkmeasure\.metrics<name=(\S+)\.(\S+)\.(\S+)\.(counter),\s*type=gauges><>Value
+        name: sparkmeasure_$3
         type: COUNTER
         labels:
           app_namespace: "$1"
