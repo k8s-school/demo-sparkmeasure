@@ -12,6 +12,7 @@ def process_batch(df, batch_id, spark_session):
     stagemetrics.begin()
 
     df.cache().count()  # force plan exécution
+    df.unpersist()
     stagemetrics.end()
 
     # Sauvegarde dans un fichier local JSON
@@ -33,11 +34,12 @@ def publish_metrics(spark_session, metrics: Dict[str, Union[float, int]]):
         dropwizard = spark_session._jvm.ch.cern.metrics.DropwizardMetrics
         for key, value in metrics.items():
             # or setGauge
-            dropwizard.setMetric(key, float(value), False)
+            is_counter = True
+            dropwizard.setMetric(key, float(value), is_counter)
             # Example counter to track the number of times metrics have been published
             publish_metrics_count += 1
 
-        dropwizard.setMetric("metrics_published_total", float(publish_metrics_count), True)
+        dropwizard.setMetric("metrics_published_total", float(publish_metrics_count), is_counter)
 
         logger.info("%d Dropwizard metrics published via JMX", len(metrics))
     except Exception as e:
