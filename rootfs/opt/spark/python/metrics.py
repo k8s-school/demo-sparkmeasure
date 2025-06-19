@@ -34,7 +34,7 @@ def publish_metrics(spark_session, metrics: Dict[str, Union[float, int]]):
             # Example counter to track the number of times metrics have been published
             publish_metrics_count += 1
 
-        dropwizard.setMetric("metrics_published_total", publish_metrics_count, True)
+        dropwizard.setMetric("metrics_published_total", float(publish_metrics_count), True)
 
         print(f"[INFO] {len(metrics)} Dropwizard metrics published via JMX")
     except Exception as e:
