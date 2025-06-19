@@ -1,0 +1,25 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: word-emitter
+  namespace: argocd
+  labels:
+    app.kubernetes.io/name: word-emitter
+    app.kubernetes.io/part-of: demo-sparkmeasure
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    server: {{ .Values.spec.destination.server }}
+    namespace: word-emitter
+  project: default
+  source:
+    path: charts/word-emitter
+    repoURL: https://github.com/k8s-school/word-emitter.git
+    targetRevision: main
+    helm:
+      releaseName: word-emitter
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+      - ApplyOutOfSyncOnly=true
