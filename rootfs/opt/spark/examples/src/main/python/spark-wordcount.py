@@ -26,8 +26,6 @@ def main():
     words = lines.select(explode(split(lines.value, " ")).alias("word"))
     word_counts = words.groupBy("word").count()
 
-
-
     # Définir le pipeline avec foreachBatch
     query = word_counts.writeStream \
         .outputMode("complete") \
