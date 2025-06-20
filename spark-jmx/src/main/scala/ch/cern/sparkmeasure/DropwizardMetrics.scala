@@ -46,7 +46,7 @@ object DropwizardMetrics {
         counters(name) = registry.counter(name)
         knownCounters.add(name)
       }
-      if (counters(name) == 0) {
+      if (counters(name).getCount == 0) {
         counters(name).inc(value.toLong)
       } else {
         throw new IllegalArgumentException(s"Counter $name already exists with value ${counters(name).getCount}. Cannot increment.")
