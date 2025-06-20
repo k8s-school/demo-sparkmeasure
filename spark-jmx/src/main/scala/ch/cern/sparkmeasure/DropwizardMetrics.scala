@@ -43,14 +43,20 @@ object DropwizardMetrics {
 
     if (isCounter) {
       if (!knownCounters.contains(name)) {
-        counters(name) = metrics.MetricRegistry.counter(name)
+        counters(name) = registry.counter(name)
+        knownCounters.add(name)
       }
-      counters.update(name, value)
+      if (counters(name) == 0) {
+        counters(name).inc(value.toLong)
+      } else {
+        throw new IllegalArgumentException(s"Counter $name already exists with value ${counters(name).getCount}. Cannot increment.")
+      }
     } else {
       if (!knownGauges.contains(name)) {
         registry.register(name, new Gauge[Double] {
-        override def getValue: Double = storage.getOrElse(name, 0.0)
+        override def getValue: Double = gauges.getOrElse(name, 0.0)
         })
+        knownGauges.add(name)
       }
       gauges.update(name, value)
     }
