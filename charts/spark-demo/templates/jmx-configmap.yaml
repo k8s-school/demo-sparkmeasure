@@ -10,13 +10,13 @@ data:
       # - pattern: ".*"
       #   name: jmx_debug_all
       #   type: GAUGE
-      - pattern: sparkmeasure\.metrics<name=(\S+)\.(\S+)\.(\S+)\.(gauge),\s*type=gauges><>Value
+      - pattern: sparkmeasure\.metrics<name=(\S+)\.(\S+)\.(\S+)><>Value
         name: sparkmeasure_$3
         type: GAUGE
         labels:
           app_namespace: "$1"
           app_id: "$2"
-      - pattern: sparkmeasure\.metrics<name=(\S+)\.(\S+)\.(\S+)\.(counter),\s*type=counters><>Count
+      - pattern: sparkmeasure\.metrics<name=(\S+)\.(\S+)\.(\S+)><>Count
         name: sparkmeasure_$3
         type: COUNTER
         labels:
