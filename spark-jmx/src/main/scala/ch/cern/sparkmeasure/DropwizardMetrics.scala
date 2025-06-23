@@ -4,7 +4,7 @@ import java.io.File
 import org.slf4j.LoggerFactory
 import scala.io.Source
 
-import com.codahale.metrics.{Counter, Gauge, MetricRegistry}
+import com.codahale.metrics.{Counter, Gauge, MetricRegistry, Timer}
 import com.codahale.metrics.jmx.JmxReporter
 
 object DropwizardMetrics {
@@ -26,6 +26,7 @@ object DropwizardMetrics {
   // Simple cache local pour éviter double registration
   private val knownGauges = scala.collection.mutable.Set[String]()
   private val knownCounters = scala.collection.mutable.Set[String]()
+  private val knownTimers = scala.collection.mutable.Set[String]()
 
   // Démarre le JMX reporter une seule fois
   private val reporter: JmxReporter = JmxReporter
@@ -35,33 +36,58 @@ object DropwizardMetrics {
 
   reporter.start()
 
-  def setMetric(shortname: String, value: Double, isCounter: Boolean): Unit = {
-    val kind = if (isCounter) "counter" else "gauge"
-    val name = s"${getNamespace()}.${getPodName()}.$shortname"
+def setMetricAutoType(shortname: String, value: Double): Unit = {
+  val lower = shortname.toLowerCase
 
-    logger.info(s"[JMX] Setting $kind: $shortname = $value")
+  val metricType =
+    if (lower.contains("time") || lower.contains("duration")) "timer"
+    else if (lower.contains("peak") || lower.contains("size")) "gauge"
+    else "counter"
 
-    if (isCounter) {
+  setMetric(shortname, value, metricType)
+}
+
+def setMetric(shortname: String, value: Double, metricType: String): Unit = {
+  val kind = metricType.toLowerCase
+  val name = s"${getNamespace()}.${getPodName()}.$shortname"
+
+  logger.info(s"[JMX] Setting $kind: $shortname = $value")
+
+  kind match {
+    case "counter" =>
       if (!knownCounters.contains(name)) {
         counters(name) = registry.counter(name)
         knownCounters.add(name)
       }
-      if (counters(name).getCount == 0) {
-        counters(name).inc(value.toLong)
-      } else {
-        throw new IllegalArgumentException(s"Counter $name already exists with value ${counters(name).getCount}. Cannot increment.")
-      }
-    } else {
+      val current = counters(name).getCount
+      val delta = value.toLong - current
+      if (delta > 0) {
+        counters(name).inc(delta)
+      } // sinon on ne décrémente pas un counter
+
+    case "gauge" =>
       if (!knownGauges.contains(name)) {
         registry.register(name, new Gauge[Double] {
-        override def getValue: Double = gauges.getOrElse(name, 0.0)
+          override def getValue: Double = gauges.getOrElse(name, 0.0)
         })
         knownGauges.add(name)
       }
       gauges.update(name, value)
-    }
+
+    case "timer" =>
+      if (!knownTimers.contains(name)) {
+        timers(name) = registry.timer(name)
+        knownTimers.add(name)
+      }
+      // on suppose que value est en millisecondes
+      timers(name).update(value.toLong, java.util.concurrent.TimeUnit.MILLISECONDS)
+
+    case _ =>
+      throw new IllegalArgumentException(s"Unknown metric type: $metricType")
   }
+}
 
   private val gauges = scala.collection.concurrent.TrieMap[String, Double]()
   private val counters = scala.collection.concurrent.TrieMap[String, Counter]()
+  private val timers = scala.collection.concurrent.TrieMap[String, Timer]()
 }
