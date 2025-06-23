@@ -37,7 +37,7 @@ object DropwizardMetrics {
 
   def setMetric(shortname: String, value: Double, isCounter: Boolean): Unit = {
     val kind = if (isCounter) "counter" else "gauge"
-    val name = s"${getNamespace()}.${getPodName()}.$shortname.$kind"
+    val name = s"${getNamespace()}.${getPodName()}.$shortname"
 
     logger.info(s"[JMX] Setting $kind: $shortname = $value")
 
