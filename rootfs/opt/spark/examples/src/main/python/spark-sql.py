@@ -6,6 +6,8 @@ Run with:
   ./bin/spark-submit --packages ch.cern.sparkmeasure:spark-measure_2.12:0.23 test_sparkmeasure_python.py
 """
 
+import logging
+
 import time
 from pyspark.sql import SparkSession
 from sparkmeasure import StageMetrics
@@ -37,6 +39,9 @@ def run_my_workload(spark):
     stagemetrics.save_data(aggregatedDF, "/tmp/stagemetrics_report_test2")
 
 if __name__ == "__main__":
+
+    logging.basicConfig(level=logging.INFO)
+
     # The Spark session is expected to be already up, created by spark-submit,
     # which handles also adding the sparkmeasure jar we just need to get a reference to it
     spark = (SparkSession

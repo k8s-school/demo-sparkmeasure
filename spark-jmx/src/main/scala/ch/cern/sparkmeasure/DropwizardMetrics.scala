@@ -51,7 +51,7 @@ def setMetric(shortname: String, value: Double, metricType: String): Unit = {
   val kind = metricType.toLowerCase
   val name = s"${getNamespace()}.${getPodName()}.$shortname"
 
-  logger.info(s"[JMX] Setting $kind: $shortname = $value")
+  logger.debug(s"[JMX] Setting $kind: $shortname = $value")
 
   kind match {
     case "counter" =>
