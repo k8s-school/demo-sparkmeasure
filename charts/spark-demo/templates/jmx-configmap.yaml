@@ -10,8 +10,8 @@ data:
       # - pattern: ".*"
       #   name: jmx_debug_all
       #   type: GAUGE
-      - pattern: sparkmeasure\.metrics<name=(\S+)\.(\S+)\.(\S+)><>Value
-        name: sparkmeasure_$3
+      - pattern: sparkmeasure\.metrics<name=(\S+)\.(\S+)\.(\S+),\s*type=(\S+)><>Value
+        name: sparkmeasure_$3_$4
         type: GAUGE
         labels:
           app_namespace: "$1"
