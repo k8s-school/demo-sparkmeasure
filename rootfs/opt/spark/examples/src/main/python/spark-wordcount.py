@@ -5,6 +5,7 @@ To run this example, you need to have a TCP server sending text data to the spec
 """
 
 from functools import partial
+import logging
 
 import metrics
 
@@ -17,6 +18,9 @@ def write_to_parquet(df):
     df.write.mode("append").parquet("/tmp/wordcount")
 
 def main():
+
+    logging.basicConfig(level=logging.INFO)
+
     spark = SparkSession.builder \
         .appName("StructuredStreamingWordCountWithStageMetrics") \
         .getOrCreate()
@@ -33,8 +37,10 @@ def main():
     words = lines.select(explode(split(lines.value, " ")).alias("word"))
     word_counts = words.groupBy("word").count()
 
+    stagemetrics = StageMetrics(spark_session)
+
     # Création de la fonction partielle qui injecte le writer
-    batch_processor = partial(metrics.process_batch, spark_session=spark, write_fn=write_to_parquet)
+    batch_processor = partial(metrics.process_batch, stagemetrics=stagemetrics, write_fn=write_to_parquet)
 
     # Définir le pipeline avec foreachBatch
     query = word_counts.writeStream \

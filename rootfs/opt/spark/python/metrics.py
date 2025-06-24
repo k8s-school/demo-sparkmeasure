@@ -7,8 +7,8 @@ import datetime
 logger = logging.getLogger(__name__)
 
 # Callback foreachBatch avec StageMetrics
-def process_batch(df, batch_id, spark_session, write_fn):
-    stagemetrics = StageMetrics(spark_session)
+def process_batch(df, batch_id, stagemetrics, write_fn):
+
     stagemetrics.begin()
 
     write_fn(df)
