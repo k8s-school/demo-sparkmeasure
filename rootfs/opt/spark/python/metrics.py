@@ -7,23 +7,20 @@ import datetime
 logger = logging.getLogger(__name__)
 
 # Callback foreachBatch avec StageMetrics
-def process_batch(df, batch_id, spark_session):
+def process_batch(df, batch_id, spark_session, write_fn):
     stagemetrics = StageMetrics(spark_session)
     stagemetrics.begin()
 
-    df.cache().count()  # force plan exécution
-    df.unpersist()
+    write_fn(df)
+
     stagemetrics.end()
 
-    # Sauvegarde dans un fichier local JSON
     timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
     logger.info("\n----------------------")
     logger.info("Metrics data for batch %s at %s", batch_id, timestamp)
     logger.info("----------------------")
-    # print report to standard output
     stagemetrics.print_report()
 
-    # get metrics data as a dictionary
     metrics = stagemetrics.aggregate_stagemetrics()
     logger.info("metrics elapsedTime = %s", metrics.get('elapsedTime'))
 
